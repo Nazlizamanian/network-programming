@@ -32,7 +32,6 @@ while_loop()
 # 1.4.2 for-statement
 # 1. Assume that animal = ["dog, "cat", "elefant"]. Write a
 # for-statement that prints all elements of animal!
-
 def animal():
     animals = ["dog", "cat", "elefant"]
     for animal in animals:

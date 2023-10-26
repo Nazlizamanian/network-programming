@@ -32,9 +32,6 @@ def fibbonacci(limit):
     b=1 
     while a<=limit:
         yield a 
-        old_a=b
-        old_b=a+b
-        a=old_a
-        b=old_b   
+        a,b= b,a
 for i in fibbonacci(1000000):
     print(i)
