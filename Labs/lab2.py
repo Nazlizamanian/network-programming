@@ -4,12 +4,12 @@ pointsPerPerson = {}
 with open("score2.txt", 'r') as file:
     for line in file:
        
-        elements = line.strip().split()
+        elements = line.strip().split()#Using the split() 
     
-        # Ensure each line has the expected format (5 elements)
+      
         if len(elements) == 5 and elements[0] == "upg.":
-            name = f"{elements[2]} {elements[3]}"  # Combine first name and last name
-            points = int(elements[4])  # Extract points as an integer
+            name = f"{elements[2]} {elements[3]}" #String the f & l name.
+            points = int(elements[4])  # Extract points as an int.
 
             if name in pointsPerPerson:
                 pointsPerPerson[name] += points
