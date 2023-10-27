@@ -26,7 +26,6 @@ print(next(numbers))
 print(next(numbers))
 print('\n')
 
-
 #4.2 Task Fibbonacci
 print("4.2 Fibbonacci using yield")
 def fibbonacci(limit):

@@ -44,13 +44,6 @@ class CardDeck:
         
         self.cards = [f"{value} of {suit}" for suit in suits for value in values]
 
-# Create a card object
-card = CardClass(2, 4)
-
-# Access methods and attributes
-print(card.get_value())  # Get the value (4)
-print(card.get_suit())   # Get the suit (2
-
 class cardGameClass:
     def __init__(self):
         self.deck = CardDeck()
@@ -61,6 +54,12 @@ class cardGameClass:
             card = self.deck.getCard()
             print("Card {} has value {}".format(card, card.getValue()))
 
+# Create a card object
+card = CardClass(2, 4)
+
+# Access methods and attributes
+print(card.get_value())  # Get the value (4)
+print(card.get_suit())   # Get the suit (2
 
 #Testing
 deck = CardDeck()
