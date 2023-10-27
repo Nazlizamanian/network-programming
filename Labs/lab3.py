@@ -1,4 +1,5 @@
 #Lab 3 Nazli Zamanian Gustavsson
+import random
 
 class CardClass:
     def __init__(self, suit, value):
@@ -17,18 +18,9 @@ class CardClass:
         values = [None, "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"]
         return f"{values[self._value]} of {suits[self._suit]}"
 
-# Create a card object
-card = CardClass(2, 4)
-
-# Access methods and attributes
-print(card.get_value())  # Get the value (4)
-print(card.get_suit())   # Get the suit (2
-
-#class cardGameClass:
-
 class CardDeck:
     def __init__(self):
-        # Initialize a list to represent the deck of cards
+        # List to represent the deck of cards.
         self.cards = []
 
     def shuffle(self):
@@ -52,3 +44,27 @@ class CardDeck:
         
         self.cards = [f"{value} of {suit}" for suit in suits for value in values]
 
+# Create a card object
+card = CardClass(2, 4)
+
+# Access methods and attributes
+print(card.get_value())  # Get the value (4)
+print(card.get_suit())   # Get the suit (2
+
+class cardGameClass:
+    def __init__(self):
+        self.deck = CardDeck()
+
+    def play_game(self):
+        self.deck.shuffle()
+        while self.deck.size() > 0:
+            card = self.deck.getCard()
+            print("Card {} has value {}".format(card, card.getValue()))
+
+
+#Testing
+deck = CardDeck()
+deck.shuffle()
+while deck.size()>0:
+    card = deck.getCard()
+    print("Card {} has value {}".format(card, card.getValue()))
