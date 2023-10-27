@@ -1,4 +1,4 @@
-#Lab 3 Nazli Zamanian Gustavsson
+#Lab3 Nazli Zamanian Gustavsson
 import random
 
 class CardClass:
@@ -16,12 +16,13 @@ class CardClass:
     def __str__(self):
         suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
         values = [None, "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"]
-        return f"{values[self._value]} of {suits[self._suit]}"
+        return f"{values[self._value]} of {suits[self._suit - 1]}"
 
 class CardDeck:
     def __init__(self):
         # List to represent the deck of cards.
         self.cards = []
+        self.reset()
 
     def shuffle(self):
         random.shuffle(self.cards)
@@ -39,31 +40,28 @@ class CardDeck:
 
     def reset(self):
         # Reset the deck to its initial state
-        suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
-        values = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"]
-        
-        self.cards = [f"{value} of {suit}" for suit in suits for value in values]
+        self.cards = [CardClass(suit, value) for suit in range(1, 5) for value in range(1, 14)]
 
-class cardGameClass:
-    def __init__(self):
+class CardGame:
+    def __init(self):
         self.deck = CardDeck()
 
     def play_game(self):
         self.deck.shuffle()
         while self.deck.size() > 0:
             card = self.deck.getCard()
-            print("Card {} has value {}".format(card, card.getValue()))
+            print(f"Card {card} has value {card.get_value()}")
 
 # Create a card object
 card = CardClass(2, 4)
 
 # Access methods and attributes
 print(card.get_value())  # Get the value (4)
-print(card.get_suit())   # Get the suit (2
+print(card.get_suit())   # Get the suit (2)
 
-#Testing
+# Testing CardDeck
 deck = CardDeck()
 deck.shuffle()
-while deck.size()>0:
+while deck.size() > 0:
     card = deck.getCard()
-    print("Card {} has value {}".format(card, card.getValue()))
+    print(f"Card {card} has value {card.get_value()}")

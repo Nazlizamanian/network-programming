@@ -30,7 +30,7 @@ print('\n')
 print("4.2 Fibbonacci using yield")
 def fibbonacci(limit):
     a=0 
-    b=1 #default for fibbonaci 0+1=1, 1+1=2, 1+2=3...
+    b=1 #default values for fibbonaci 0+1=1, 1+1=2, 1+2=3...
     while a<=limit: 
         yield a 
         a,b= b, a+b
