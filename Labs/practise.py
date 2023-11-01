@@ -18,3 +18,9 @@ first =input("First: ") #input return a string
 sec= input("Seccond: ")
 sum=float(first)+float(sec)
 print(sum)
+
+file_path="score2.txt"
+with open(file_path, 'r') as file:
+    contents=file.read()
+    print(contents)
+    
