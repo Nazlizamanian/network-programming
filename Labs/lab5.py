@@ -29,7 +29,6 @@ def main():
             opponent_move = client_socket.recv(1).decode('utf-8')
             print(f"(opponent's move: {opponent_move})")
 
-            # Determine the winner (without updating points yet)
             result = determine_winner(player_move, opponent_move)
 
             if result == "win":
