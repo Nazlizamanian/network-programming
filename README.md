@@ -6,6 +6,7 @@ Lab assigmenets completed in the course Network Programming course code TNPK18 u
 This lab assignment involves creating a script to extract and analyze data from a file named "score2.txt." The script calculates and identifies the top scorers, displaying their names and respective scores. It's an exercise in data processing and analysis. 
 
 - ### Lab 3
+This program simulates a card game with three classes: CardClass representing individual playing cards, CardDeck for managing a deck of cards, and CardGame for playing the game. It creates and shuffles a deck of cards, then draws and displays cards with their values.
 
 - ### Lab 4 
 Implemented a function called fibbonacci(limit) that employs the 'yield' keyword to produce Fibonacci numbers. It calculates Fibonacci numbers until the value reaches or exceeds the specified limit. The Fibonacci sequence starts with 0 and 1, and each subsequent number is the sum of the two previous numbers.
