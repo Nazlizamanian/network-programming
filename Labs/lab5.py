@@ -7,7 +7,7 @@ def main():
     if role == 'S':
         # Server code
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        server_socket.bind(('localhost', 60003))
+        server_socket.bind((socket.gethostname(), 60003))
         server_socket.listen(1)
 
         print("Waiting for a client to connect...")
@@ -103,16 +103,11 @@ def main():
 def determine_winner(player, opponent):
     if player == opponent:
         return "draw"
-    
-    if (player == 'R' and opponent == 'S'):
+     
+    elif (player =='R' and opponent =='S') or (player =='P' and opponent =='R') or (player== "S" and opponent =='P'):
         return "win"
-    if (player == 'S' and opponent == 'P'):
-        return "win"
-    if (player == 'P' and opponent == 'R'):
-        return "win"
-    
+   
     return "lose"
-
 
 if __name__ == "__main__":
     main()
