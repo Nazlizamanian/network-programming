@@ -2,18 +2,18 @@
 import random
 
 class Card:
-    def __init__(self, suit, value):
+    def __init__(self, suit, value): #Constructor method intializes
         assert 1 <= suit <= 4 and 1 <= value <= 13
         self._suit = suit
         self._value = value
 
-    def getValue(self):
+    def getValue(self): #Some getters.
         return self._value
 
     def getSuit(self):
         return self._suit
 
-    def __str__(self):
+    def __str__(self): #returns our string putted together.
         suits = ["Spades", "Hearts", "Diamonds", "Clubs"]
         values = ["One","Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King", "Ace"]
         return f"{values[self._value - 1]} of {suits[self._suit - 1]}"
@@ -36,7 +36,7 @@ class CardDeck:
     def size(self):
         return len(self._cards)
 
-    def reset(self):
+    def reset(self): #Reinitalizing the cards. 
         self.__init__()
 
 # Test code

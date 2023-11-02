@@ -45,7 +45,7 @@ def main():
 
             print(f"({player_points},{opponent_points})")
 
-            if player_points == 10 or opponent_points == 10:
+            if player_points == 3 or opponent_points == 3:
                 if player_points > opponent_points:
                     print(f"You won {player_points} against {opponent_points}")
                 else:
@@ -90,25 +90,29 @@ def main():
             elif result == "lose":
                 opponent_points += 1
 
-            if player_points == 10 or opponent_points == 10:
+            if player_points == 3 or opponent_points == 3:
                 if player_points > opponent_points:
                     print(f"You won {player_points} against {opponent_points}")
                 else:
                     print(f"You lost {player_points} against {opponent_points}")
                 break
 
-        client_socket.close()
-
     else:
         print("Invalid role. Please enter 'C' or 'S.")
-
+        
 def determine_winner(player, opponent):
     if player == opponent:
         return "draw"
-    elif (player == 'R' and opponent == 'S') or (player == 'S' and opponent == 'P') or (player == 'P' and opponent == 'R'):
+    
+    if (player == 'R' and opponent == 'S'):
         return "win"
-    else:
-        return "lose"
+    if (player == 'S' and opponent == 'P'):
+        return "win"
+    if (player == 'P' and opponent == 'R'):
+        return "win"
+    
+    return "lose"
+
 
 if __name__ == "__main__":
     main()
