@@ -1,67 +1,49 @@
-#Lab3 Nazli Zamanian Gustavsson
+#Lab 3 Nazli Zamanian Gustavsson
 import random
 
-class CardClass:
+class Card:
     def __init__(self, suit, value):
         assert 1 <= suit <= 4 and 1 <= value <= 13
         self._suit = suit
         self._value = value
 
-    def get_value(self):
+    def getValue(self):
         return self._value
 
-    def get_suit(self):
+    def getSuit(self):
         return self._suit
 
     def __str__(self):
-        suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
-        values = [None, "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"]
-        return f"{values[self._value]} of {suits[self._suit - 1]}"
+        suits = ["Spades", "Hearts", "Diamonds", "Clubs"]
+        values = ["One","Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King", "Ace"]
+        return f"{values[self._value - 1]} of {suits[self._suit - 1]}"
 
 class CardDeck:
     def __init__(self):
-        # List to represent the deck of cards.
-        self.cards = []
-        self.reset()
+        self._cards = []
+        for suit in range(1, 5):
+            for value in range(1, 14):
+                self._cards.append(Card(suit, value))
 
     def shuffle(self):
-        random.shuffle(self.cards)
+        random.shuffle(self._cards)
 
     def getCard(self):
-        # Get and remove a card from the top of the deck
-        if self.cards:
-            return self.cards.pop()
-        else:
-            return "No cards left in the deck."
+        if not self._cards:
+            return None
+        return self._cards.pop()
 
     def size(self):
-        # Return the number of cards left in the deck
-        return len(self.cards)
+        return len(self._cards)
 
     def reset(self):
-        # Reset the deck to its initial state
-        self.cards = [CardClass(suit, value) for suit in range(1, 5) for value in range(1, 14)]
+        self.__init__()
 
-class CardGame:
-    def __init(self):
-        self.deck = CardDeck()
-
-    def play_game(self):
-        self.deck.shuffle()
-        while self.deck.size() > 0:
-            card = self.deck.getCard()
-            print(f"Card {card} has value {card.get_value()}")
-
-# Create a card object
-card = CardClass(2, 4)
-
-# Access methods and attributes
-print(card.get_value())  # Get the value (4)
-print(card.get_suit())   # Get the suit (2)
-
-# Testing CardDeck
+# Test code
 deck = CardDeck()
 deck.shuffle()
+
 while deck.size() > 0:
     card = deck.getCard()
-    print(f"Card {card} has value {card.get_value()}")
+    if card:
+        print(f"Card {card} has value {card.getValue()}")
