@@ -7,7 +7,7 @@ def main():
     if role == 'S':
         # Server code
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        server_socket.bind((socket.gethostname(), 60003))
+        server_socket.bind((socket.gethostname(), 60003)) # 192.168.0.13
         server_socket.listen(1)
 
         print("Waiting for a client to connect...")
@@ -106,7 +106,7 @@ def determine_winner(player, opponent):
      
     elif (player =='R' and opponent =='S') or (player =='P' and opponent =='R') or (player== "S" and opponent =='P'):
         return "win"
-   
+    
     return "lose"
 
 if __name__ == "__main__":
