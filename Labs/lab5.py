@@ -2,17 +2,18 @@
 
 import socket
 
+
 def main():
     role = input("Do you want to be a client (C) or server (S)? ").strip().upper()
     
     if role == 'S':
         # Server code
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        server_socket.bind((socket.gethostname(), 60003)) # 192.168.0.13
+        server_socket.bind(('localhost', 60003)) 
         server_socket.listen(1)
 
         print("Waiting for a client to connect...")
-        client_socket, addr = server_socket.accept()
+        client_socket, addr = server_socket.accept() #server set ut to accept incoming c
         print(f"Connected to {addr}")
 
         player_points = 0
@@ -26,7 +27,7 @@ def main():
                 print("Invalid move. Please enter R, P, or S: ", end='', flush=True)
                 player_move = input().strip().upper()
 
-            client_socket.send(player_move.encode('utf-8'))
+            client_socket.send(player_move.encode('utf-8')) #sends clients move.
 
             opponent_move = client_socket.recv(1).decode('utf-8')
             print(f"(opponent's move: {opponent_move})")
@@ -58,8 +59,8 @@ def main():
 
     elif role == 'C':
         # Client code
-        client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        server_ip = input("Enter the server's IP address: ")
+        client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
+        server_ip = input("Enter the server's IP address: ")  
         client_socket.connect((server_ip, 60003))
 
         player_points = 0
@@ -76,8 +77,7 @@ def main():
 
             opponent_move = client_socket.recv(1).decode('utf-8')
             print(f"(opponent's move: {opponent_move})")
-
-            # Determine the winner (without updating points yet)
+            
             result = determine_winner(player_move, opponent_move)
 
             if result == "win":

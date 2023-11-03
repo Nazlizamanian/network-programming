@@ -15,7 +15,7 @@ class Card:
 
     def __str__(self): #returns our string putted together.
         suits = ["Spades", "Hearts", "Diamonds", "Clubs"]
-        values = ["One","Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King", "Ace"]
+        values = ["One","Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"]
         return f"{values[self._value - 1]} of {suits[self._suit - 1]}"
 
 class CardDeck:
@@ -25,10 +25,7 @@ class CardDeck:
             for value in range(1, 14):
                 self._cards.append(Card(suit, value))
 
-    def shuffle(self):
-        random.shuffle(self._cards)
-
-    def getCard(self):
+    def shuffle(self)<c    def getCard(self):
         if not self._cards:
             return None
         return self._cards.pop()
@@ -42,8 +39,10 @@ class CardDeck:
 # Test code
 deck = CardDeck()
 deck.shuffle()
+current_size = deck.size()
 
 while deck.size() > 0:
     card = deck.getCard()
     if card:
         print(f"Card {card} has value {card.getValue()}")
+   
