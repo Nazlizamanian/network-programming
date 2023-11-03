@@ -1,4 +1,5 @@
 #Lab5 Nazli Zamanian Gustavsson
+
 import socket
 
 def main():
@@ -103,12 +104,14 @@ def main():
 def determine_winner(player, opponent):
     if player == opponent:
         return "draw"
-     
-    elif (player =='R' and opponent =='S') or (player =='P' and opponent =='R') or (player== "S" and opponent =='P'):
+    elif player == 'R' and opponent == 'S':
         return "win"
+    elif player == 'S' and opponent == 'P':
+        return "win"
+    elif player == 'R' and opponent == 'P':
+        return "win"
+    else:
+        return "lose"
     
-    return "lose"
-
 if __name__ == "__main__":
     main()
-
