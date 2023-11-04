@@ -19,7 +19,7 @@ A basic program that enables two users to engage in a simplified Rock, Paper and
 
 ## Lab 6 
 ### Description 
-This code is a simple Python program that creates a basic HTTP server. It listens on a port and responds to incoming HTTP requests with a simple HTML page that displays the client's request. 
+This program creates a basic HTTP server. It listens on a port and responds to incoming HTTP requests with a simple HTML page that displays the client's request. 
 
 ## Lab 7 
 ### Description 
