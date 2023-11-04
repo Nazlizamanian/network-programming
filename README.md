@@ -17,6 +17,9 @@ Implemented a function called fibbonacci(limit) that employs the 'yield' keyword
 ### Description
 A basic program that enables two users to engage in a simplified Rock, Paper and Scissors game through a network connection. One user can act as the server, while the other can be the client. The server is first intalized in order for the client to make a connection. Then they take turns making moves and determine the winner based on the game's rules. The game continues until one player accumulates 10 points, and the overall winner is declared.
 
+## Lab 6 
+### Description 
+This code is a simple Python program that creates a basic HTTP server. It listens on a port and responds to incoming HTTP requests with a simple HTML page that displays the client's request. 
 
 ## Lab 7 
 ### Description 
