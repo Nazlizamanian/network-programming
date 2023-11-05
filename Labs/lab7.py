@@ -17,6 +17,14 @@ sockets_list = [server_socket]
 
 clients = {}
 
+def send_message_to_all_clients(message, exclude_client=None):
+    for client_socket in clients:
+        if client_socket != exclude_client:
+            try:
+                client_socket.send(message)
+            except:
+                pass
+
 
 def receive_message(client_socket):
     try:
@@ -29,7 +37,6 @@ def receive_message(client_socket):
 
     except:  # This will only be hit if the script is broken
         return False
-
 
 while True:
     read_sockets, _, exception_sockets = select.select(sockets_list, [], sockets_list)
@@ -44,6 +51,9 @@ while True:
 
             sockets_list.append(client_socket)
             clients[client_socket] = user
+
+            connected_message = f"[{client_address[0]}:{client_address[1]}] (connected)\n".encode('utf-8')
+            send_message_to_all_clients(connected_message, exclude_client=client_socket)
 
             print(f"Accepted new connection from {client_address[0]}:{client_address[1]} username: {user['data'].decode('utf-8')}")
 

@@ -25,7 +25,10 @@ class CardDeck:
             for value in range(1, 14):
                 self._cards.append(Card(suit, value))
 
-    def shuffle(self)<c    def getCard(self):
+    def shuffle(self):
+        random.shuffle(self._cards)
+
+    def getCard(self):
         if not self._cards:
             return None
         return self._cards.pop()
@@ -46,3 +49,31 @@ while deck.size() > 0:
     if card:
         print(f"Card {card} has value {card.getValue()}")
    
+# def test_card_class():
+#     card = Card(1, 11)  # Jack of Spades
+#     assert card.getValue() == 11
+#     assert card.getSuit() == 1
+#     assert str(card) == "Jack of Spades"
+
+# # Test the CardDeck class
+# def test_card_deck_class():
+#     deck = CardDeck()
+
+#     # Test shuffle and size
+#     deck.shuffle()
+#     assert deck.size() == 52
+
+#     # Test getCard
+#     card = deck.getCard()
+#     assert card.getValue() == 13  # King
+#     assert card.getSuit() == 4  # Clubs
+
+#     # Test reset
+#     deck.reset()
+#     assert deck.size() == 52
+
+# # Run the test cases
+# if __name__ == "__main":
+#     test_card_class()
+#     test_card_deck_class()
+#     print("All test cases passed.")
