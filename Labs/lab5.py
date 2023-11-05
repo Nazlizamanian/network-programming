@@ -1,13 +1,10 @@
 #Lab5 Nazli Zamanian Gustavsson
-
 import socket
-
 
 def main():
     role = input("Do you want to be a client (C) or server (S)? ").strip().upper()
     
     if role == 'S':
-        # Server code
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         server_socket.bind(('localhost', 60003)) 
         server_socket.listen(1)
@@ -47,11 +44,7 @@ def main():
 
             print(f"({player_points},{opponent_points})")
 
-            if player_points == 3 or opponent_points == 3:
-                if player_points > opponent_points:
-                    print(f"You won {player_points} against {opponent_points}")
-                else:
-                    print(f"You lost {player_points} against {opponent_points}")
+            if check_game_over(player_points, opponent_points):
                 break
 
         client_socket.close()
@@ -91,17 +84,13 @@ def main():
             elif result == "lose":
                 opponent_points += 1
 
-            if player_points == 3 or opponent_points == 3:
-                if player_points > opponent_points:
-                    print(f"You won {player_points} against {opponent_points}")
-                else:
-                    print(f"You lost {player_points} against {opponent_points}")
+            if check_game_over(player_points, opponent_points):
                 break
 
     else:
         print("Invalid role. Please enter 'C' or 'S.")
         
-def determine_winner(player, opponent):
+def determine_winner(player, opponent): #Game Logic
     if player == opponent:
         return "draw"
     elif player == 'R' and opponent == 'S':
@@ -112,6 +101,16 @@ def determine_winner(player, opponent):
         return "win"
     else:
         return "lose"
+    
+def check_game_over(player_points, opponent_points): #Game rules, first to 3. 
+    if player_points == 3 or opponent_points == 3:
+        print("Game over!")
+        if player_points > opponent_points:
+            print(f"You won {player_points} against {opponent_points}")
+        else:
+            print(f"You lost {player_points} against {opponent_points}")
+        return True
+    return False
     
 if __name__ == "__main__":
     main()
