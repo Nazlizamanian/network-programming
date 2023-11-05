@@ -6,7 +6,8 @@ from firebase_admin import  credentials, db
 cred = credentials.Certificate("path/to/serviceAccountKey.json")
 firebase_admin.initialize_app(cred, {'databaseURL': 'https://lab12-9e351-default-rtdb.europe-west1.firebasedatabase.app/'})  
 
-# Create a reference to the root of your database
+# Create a refer
+# ence to the root of your database
 ref = db.reference('/')
 
 def stream_handler(message):
