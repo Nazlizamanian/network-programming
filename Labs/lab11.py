@@ -4,7 +4,7 @@ import sqlite3
 conn = sqlite3.connect('score_data.db')
 cursor = conn.cursor()
 
-# Create the 'persons' and 'scores' tables
+
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS persons (
         id INTEGER PRIMARY KEY,
@@ -12,6 +12,7 @@ cursor.execute('''
         last_name TEXT
     )
 ''')
+
 
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS scores (
@@ -67,13 +68,33 @@ cursor.execute('''
 most_difficult_tasks = cursor.fetchall()
 
 
-print("(a) List of the 10 persons with the highest total points: ")
-for person in top_10_persons:
-    print(f"{person[0]} {person[1]} - Total Points: {person[2]}")
+def print_create_tables():
+    print("Tables\n")
+    print("Persons table\n")
+    cursor.execute("SELECT * FROM Persons")
+    persons_table = cursor.fetchall()
+    for row in persons_table:
+        print(row)
+        
+def print_sql_results():
+    print("(a) List of the 10 persons with the highest total points: ")
+    for person in top_10_persons:
+        print(f"{person[0]} {person[1]} - Total Points: {person[2]}")
 
-print("\n(b) List of the 10 most difficult tasks: ")
-for task in most_difficult_tasks:
-    print(f"Task {task[0]} - Total Points: {task[1]}")
+    print("\n(b) List of the 10 most difficult tasks: ")
+    for task in most_difficult_tasks:
+        print(f"Task {task[0]} - Total Points: {task[1]}")  
+    
+    
+while True:
+    choice = input("\n Enter 1 to print tables or 2 to print SQL query results\n")
+    
+    if choice == '1':
+        print("Printing creating tables persons and scores\n")
+        print_create_tables()
+    else: 
+        print("Printing SQL query results\n")
+        print_sql_results()
+    
 
-# Close the connection
 conn.close()
