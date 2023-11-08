@@ -3,76 +3,65 @@
 import socket
 import select
 
+# Define the server configuration
+IP = "0.0.0.0"  # Listen on all available network interfaces
+PORT = 60003
 HEADER_LENGTH = 10
-IP = "127.0.0.1"
-PORT = 1234
 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-
 server_socket.bind((IP, PORT))
-server_socket.listen()
+server_socket.listen()  
 
-sockets_list = [server_socket]
-
+list_of_sockets = [server_socket]
 clients = {}
 
-def send_message_to_all_clients(message, exclude_client=None):
-    for client_socket in clients:
-        if client_socket != exclude_client:
-            try:
-                client_socket.send(message)
-            except:
-                pass
-
-
-def receive_message(client_socket):
+def send_message(client_socket, message):
     try:
-        message_header = client_socket.recv(HEADER_LENGTH)
-        if not len(message_header):
-            return False
+        client_socket.send(message)
+    except Exception as e:
+        print(f"Error sending message: {str(e)}")
 
-        message_length = int(message_header.decode('utf-8').strip())
-        return {"header": message_header, "data": client_socket.recv(message_length)}
+def broadcast_message(sender_socket, message):
+    for client_socket in clients:
+        if client_socket != sender_socket:
+            send_message(client_socket, message)
 
-    except:  # This will only be hit if the script is broken
-        return False
+print(f"Listening on {IP}:{PORT}")
 
 while True:
-    read_sockets, _, exception_sockets = select.select(sockets_list, [], sockets_list)
+    read_sockets, _, _ = select.select(list_of_sockets, [], [])
 
     for notified_socket in read_sockets:
         if notified_socket == server_socket:
+            # A new client is trying to connect
             client_socket, client_address = server_socket.accept()
+            list_of_sockets.append(client_socket)
 
-            user = receive_message(client_socket)
-            if user is False:
-                continue
+            # Notify existing clients about the new connection
+            for client in clients:
+                if client != server_socket:
+                    connection_message = f"[{client_address[0]}:{client_address[1]}] (connected)\n".encode('utf-8')
+                    send_message(client, connection_message)
 
-            sockets_list.append(client_socket)
-            clients[client_socket] = user
-
-            connected_message = f"[{client_address[0]}:{client_address[1]}] (connected)\n".encode('utf-8')
-            send_message_to_all_clients(connected_message, exclude_client=client_socket)
-
-            print(f"Accepted new connection from {client_address[0]}:{client_address[1]} username: {user['data'].decode('utf-8')}")
+            clients[client_socket] = client_address
+            print(f"Accepted new connection from {client_address[0]}:{client_address[1]}")
 
         else:
-            message = receive_message(notified_socket)
+            # An existing client sent a message
+            client_socket = notified_socket
+            data = client_socket.recv(2048)
 
-            if message is False:
-                print(f"Closed connection from {clients[notified_socket]['data'].decode('utf-8')}")
-                sockets_list.remove(notified_socket)
-                del clients[notified_socket]
+            if not data:
+                # Client disconnected
+                client_address = clients[client_socket]
+                del clients[client_socket]
+                list_of_sockets.remove(client_socket)
+                disconnect_message = f"[{client_address[0]}:{client_address[1]}] (disconnected)\n".encode('utf-8')
+                broadcast_message(client_socket, disconnect_message)
+                print(f"Connection from {client_address[0]}:{client_address[1]} closed")
             else:
-                user = clients[notified_socket]
-
-                print(f"Received message from {user['data'].decode('utf-8')}: {message['data'].decode('utf-8')}")
-
-                for client_socket in clients:
-                    if client_socket != notified_socket:
-                        client_socket.send(user['header'] + user['data'] + message['header'] + message['data'])
-
-    for notified_socket in exception_sockets:
-        sockets_list.remove(notified_socket)
-        del clients[notified_socket]
+                # Broadcast the message to all connected clients
+                client_address = clients[client_socket]
+                message = f"[{client_address[0]}:{client_address[1]}] {data.decode('utf-8')}".encode('utf-8')
+                broadcast_message(client_socket, message)
+                print(f"Received message from {client_address[0]}:{client_address[1]}: {data.decode('utf-8')}")

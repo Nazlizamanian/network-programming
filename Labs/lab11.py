@@ -1,3 +1,4 @@
+#Lab 11 Nazli Zamanian Gustavsson
 import sqlite3
 
 # Create a SQLite database and establish a connection
@@ -12,7 +13,6 @@ cursor.execute('''
         last_name TEXT
     )
 ''')
-
 
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS scores (
