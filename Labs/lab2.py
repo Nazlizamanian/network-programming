@@ -21,5 +21,7 @@ top_scorers = [name for name, points in pointsPerPerson.items() if points == max
 for name in top_scorers:
     print(f"{name} got the most points: {max_points} points.")
 
+
+#################################################################
 # The winner was Maria Johansson with 37 points and 
 # Kristina Larsson who got equally the same amount, 37 points. 
