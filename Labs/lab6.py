@@ -41,9 +41,9 @@ def start_server(host, port):
                 # Extract the request from the client's data
                 request = data.split('\n\n', 1)[-1]
 
-                response = create_response_html(request)
+                response = create_response_html(request) #calls fun, to generate HTML response based on the request.
 
-                client_socket.sendall(response.encode('utf-8'))
+                client_socket.sendall(response.encode('utf-8')) #sends the response back to the client.
 
 if __name__ == '__main__':
     host = '127.0.0.1' 

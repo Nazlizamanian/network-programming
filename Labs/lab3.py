@@ -39,41 +39,35 @@ class CardDeck:
     def reset(self): #Reinitalizing the cards. 
         self.__init__()
 
-# Test code
-deck = CardDeck()
-deck.shuffle()
-current_size = deck.size()
 
-while deck.size() > 0:
-    card = deck.getCard()
-    if card:
-        print(f"Card {card} has value {card.getValue()}")
-   
-# def test_card_class():
-#     card = Card(1, 11)  # Jack of Spades
-#     assert card.getValue() == 11
-#     assert card.getSuit() == 1
-#     assert str(card) == "Jack of Spades"
+def test_card_deck_class():
+    # Create a CardDeck instance
+    deck = CardDeck()
+    assert deck.size() == 52
 
-# # Test the CardDeck class
-# def test_card_deck_class():
-#     deck = CardDeck()
+    # Shuffle the deck
+    deck.shuffle()
 
-#     # Test shuffle and size
-#     deck.shuffle()
-#     assert deck.size() == 52
+    # Draw and check each card from the shuffled deck
+    drawn_cards = []
+    while deck.size() > 0:
+        card = deck.getCard()
+        if card:
+            drawn_cards.append(card)
 
-#     # Test getCard
-#     card = deck.getCard()
-#     assert card.getValue() == 13  # King
-#     assert card.getSuit() == 4  # Clubs
+    # Verify that the number of drawn cards matches the size of the initial deck
+    assert len(drawn_cards) == 52
 
-#     # Test reset
-#     deck.reset()
-#     assert deck.size() == 52
+    # Verify that all drawn cards are unique
+    unique_cards = set(drawn_cards)
+    assert len(unique_cards) == 52
 
-# # Run the test cases
-# if __name__ == "__main":
-#     test_card_class()
-#     test_card_deck_class()
-#     print("All test cases passed.")
+    # Reset the deck
+    deck.reset()
+
+    assert deck.size() == 52
+
+    print("test_card_deck_class passed")
+
+if __name__ == "__main__":
+    test_card_deck_class()
