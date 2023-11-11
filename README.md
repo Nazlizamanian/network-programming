@@ -19,7 +19,7 @@ A basic program that enables two users to engage in a simplified Rock, Paper and
 
 ## Lab 6 
 ### Description 
-This program creates a basic HTTP server. It listens on a port and responds to incoming HTTP requests with a simple HTML page that displays the client's request. 
+This program creates a basic HTTP server. It listens on a port and responds to incoming HTTP requests with a simple HTML page that displays the client's response. 
 
 ## Lab 7 
 ### Description 
