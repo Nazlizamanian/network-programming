@@ -3,7 +3,6 @@
 import socket
 import select
 
-# Define the server configuration
 IP = "0.0.0.0"  # Listen on all available network interfaces
 PORT = 60003
 HEADER_LENGTH = 10

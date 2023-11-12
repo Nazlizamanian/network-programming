@@ -1,5 +1,5 @@
 #Lab9 Nazli Zamanian Gustavsson
-#9.2 Comporession
+#9.2 Compression
 
 file_path = 'exempeltext.txt'
 

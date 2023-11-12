@@ -7,15 +7,15 @@ def create_response_html(request):
     response = """
 HTTP/1.1 200 OK
 Content-Type: text/html
-Content-Length: {}
+Content-Length: {} 
 
 <html>
 <head>
-    <title>Request Description</title>
+    <title>Request </title>
 </head>
 <body>
     <h1>Your browser made the following request: </h1>
-    <pre>{}</pre>
+    <pre>{}</pre> 
 </body>
 </html>
 """.format(len(request), request)
@@ -35,20 +35,14 @@ def start_server(host, port):
                 print(f"Connection from {client_address}")
 
                 data = client_socket.recv(1024).decode('utf-8')
-                if not data:
+                if not data: #if no data is sent we break.
                     break
 
-                # Extract the request from the client's data
-                request = data.split('\n\n', 1)[-1]
-
+                request = data.split('\n\n', 1)[-1]# Extract the request from the client's data, split up lines.
                 response = create_response_html(request) #calls fun, to generate HTML response based on the request.
-
                 client_socket.sendall(response.encode('utf-8')) #sends the response back to the client.
 
 if __name__ == '__main__':
     host = '127.0.0.1' 
-    port = 8080 
-
+    port = 8080
     start_server(host, port)
-
-

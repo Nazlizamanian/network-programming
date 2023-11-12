@@ -1,10 +1,8 @@
 #Lab 11 Nazli Zamanian Gustavsson
 import sqlite3
 
-# Create a SQLite database and establish a connection
 conn = sqlite3.connect('score_data.db')
-cursor = conn.cursor()
-
+cursor = conn.cursor() 
 
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS persons (
@@ -35,18 +33,11 @@ with open('score2.txt', 'r') as file:
         cursor.execute('INSERT INTO persons (first_name, last_name) VALUES (?, ?)', (first_name, last_name))
         
         cursor.execute('SELECT id FROM persons WHERE first_name=? AND last_name=?', (first_name, last_name))
-        person_id = cursor.fetchone()[0]
+        person_id = cursor.fetchone()[0] #use to our ID to our scores table. 
         
         cursor.execute('INSERT INTO scores (task_number, points, person_id) VALUES (?, ?, ?)', (task_number, points, person_id))
-
-conn.commit()
-conn.close()
-
-# Reopen the database and connection
-conn = sqlite3.connect('score_data.db')
-cursor = conn.cursor()
-
-# (a) List the 10 persons with the highest total points
+        
+#(a) List the 10 persons with the highest total points
 cursor.execute('''
     SELECT p.first_name, p.last_name, SUM(s.points) AS total_points
     FROM persons p
@@ -68,13 +59,22 @@ cursor.execute('''
 most_difficult_tasks = cursor.fetchall()
 
 
-def print_create_tables():
+def print_create_table_person():
     print("Tables\n")
     print("Persons table\n")
-    cursor.execute("SELECT * FROM Persons")
+    cursor.execute("SELECT * FROM persons")
     persons_table = cursor.fetchall()
     for row in persons_table:
         print(row)
+        
+def print_create_table_scores():
+    print("Tables\n")
+    print("Scores table\n")
+    cursor.execute("SELECT * FROM scores")
+    scores_table = cursor.fetchall()
+    for row in scores_table:
+        print(row)
+        
         
 def print_sql_results():
     print("(a) List of the 10 persons with the highest total points: ")
@@ -87,14 +87,14 @@ def print_sql_results():
     
     
 while True:
-    choice = input("\n Enter 1 to print tables or 2 to print SQL query results\n")
+    choice = input("\n Enter 1 to print table Person, 2 to print table Scores or 3 to print SQL query results\n")
     
     if choice == '1':
-        print("Printing creating tables persons and scores\n")
-        print_create_tables()
-    else: 
+        print("Printing creating tables persons\n")
+        print_create_table_person()
+    if choice == '2':
+        print("Printing creating tables scores\n")
+        print_create_table_scores()
+    if choice == '3': 
         print("Printing SQL query results\n")
         print_sql_results()
-    
-
-conn.close()

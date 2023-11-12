@@ -18,10 +18,11 @@ class Card:
         values = ["One","Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"]
         return f"{values[self._value - 1]} of {suits[self._suit - 1]}"
 
+
 class CardDeck:
     def __init__(self):
         self._cards = []
-        for suit in range(1, 5):
+        for suit in range(1, 5): 
             for value in range(1, 14):
                 self._cards.append(Card(suit, value))
 
@@ -38,6 +39,22 @@ class CardDeck:
 
     def reset(self): #Reinitalizing the cards. 
         self.__init__()
+
+# Test code
+deck = CardDeck()
+deck.shuffle()
+current_size = deck.size()
+
+while deck.size() > 0:
+    card = deck.getCard()
+    if card:
+        print(f"Card {card} has value {card.getValue()}")
+   
+def test_card_class():
+    card = Card(1, 11)  # Jack of Spades
+    assert card.getValue() == 11
+    assert card.getSuit() == 1
+    assert str(card) == "Jack of Spades"
 
 
 def test_card_deck_class():

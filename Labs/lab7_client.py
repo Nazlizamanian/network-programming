@@ -5,7 +5,7 @@ import socket
 IP = 'localhost'
 PORT = 60003
 
-client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client_socket = socket.socket() #default AF IPv4 and uses TCP. 
 client_socket.connect((IP, PORT ))
 
 while True: 
