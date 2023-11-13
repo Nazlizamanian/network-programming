@@ -39,12 +39,14 @@ def is_valid_email(email):
     # Use re.match() to check if the email matches the pattern
     match = re.match(email_pattern, email)
     
-    # If there is a match, the email is valid; otherwise, it's not
-    return bool(match)
+    # If there is a match, print the email address; otherwise, print an error message
+    if match:
+        print(f"The email address '{email}' is valid.")
+    else:
+        print(f"The email address '{email}' is not valid.")
 
 # Test the function with examples
-print(is_valid_email('r.nohre@jth.hj.se'))  
-print(is_valid_email('bjox@se'))      
-print(is_valid_email('adam@example.com'))  
-print(is_valid_email('jox@jox@jox.com."'))    
-
+is_valid_email('r.nohre@jth.hj.se')
+is_valid_email('bjox@se')
+is_valid_email('adam@example.com')
+is_valid_email('jox@jox@jox.com."')
