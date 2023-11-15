@@ -8,11 +8,11 @@ re.findall("or", txt)
 
 #10.2.1 Dot means joker
 #dot in regex matches all characters. except linebreak.
-import re
+
 txt = "Hanoror bought 5 portions of orange soil for 13.50 EUR."
 re.findall(".", txt)
 
-import re
+
 txt = "Hanoror bought 5 portions of orange soil for 13.50 EUR."
 re.findall("or.", txt) #searches for all strings that start with or and continue charater.
 # findall find only non-overlapping strings.
@@ -32,7 +32,7 @@ re.findall(r"\s",txt) #spaces
 
 #Task 1 // Task 2??
 def is_valid_email(email):
-    # Define the regular expression pattern for a valid email address
+    
     email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
     
     # Use re.match() to check if the email matches the pattern
@@ -42,11 +42,11 @@ def is_valid_email(email):
         print(f"The email address '{email}' is valid.")
 
 is_valid_email('r.nohre@jth.hj.se')
-is_valid_email('bjox@se')
+is_valid_email('bjox@se') #not valid
 is_valid_email('adam@example.com')
-is_valid_email('jox@jox@jox.com."')
+is_valid_email('jox@jox@jox.com."') #not valid
 
-#Task 3
+#Task 3 Simpsons Tv tabla 
 import re
 
 html_code = """
@@ -124,14 +124,15 @@ Amerikansk animerad komediserie från 2007. Säsong 19. Del 9 av 20. En morgon n
 </td>
 </tr>
 """
-regex_pattern = r'<td class="svtTablaTime">\s*(.*?)\s*<\/td>\s*<td class="svtJsTablaShowInfo">\s*<h4 class="svtLink-hover svtTablaHeading">\s*(.*?)\s*<\/h4>\s*<div class="svtJsStopPropagation">\s*<div class="svtTablaTitleInfo svtHide-Js">\s*<div class="svtTablaContent-Description">\s*<p class="svtXMargin-Bottom-10px">\s*(.*?)\s*<\/p>\s*<\/div>\s*<\/div>\s*<\/div>\s*<\/td>'
 
-matches = re.finditer(regex_pattern, html_code, re.DOTALL)
+regex_pattern = r'<td class="svtTablaTime">\s*(.*?)\s*<\/td>\s*(?:<td.*?>\s*<h4.*?>\s*.*?\s*<\/h4>\s*<div.*?>\s*<div.*?>\s*<div.*?>\s*<p.*?>\s*(.*?)\s*<\/p>\s*<\/div>\s*<\/div>\s*<\/div>\s*<\/td>)?'
+
+
+matches = re.finditer(regex_pattern, html_code, re.DOTALL) #iterator to match our regex with the html code. 
 
 for match in matches:
     time = match.group(1)
-    simpsons_title = match.group(2)
-    handling = match.group(3)
+    handling = match.group(2)
 
     # Extract season and episode information
     season_match = re.search(r'Säsong (\d+)', handling)
