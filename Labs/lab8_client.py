@@ -99,7 +99,7 @@ def connectHandler(master):
     else:
         tryToConnect()
 
-# a utility method to print to the message field        
+      
 def printToMessages(message):
     g_app.msgText.configure(state=tk.NORMAL)
     g_app.msgText.insert(tk.END, message + '\n')
@@ -146,11 +146,8 @@ def disconnect():
         g_app.connectButton['text'] = 'connect'
         printToMessages("Disconnected")
 
-   
-
     # once disconnected, set buttons text to 'connect'
     g_app.connectButton['text'] = 'connect'
-
     
 # attempt to connect to server    
 def tryToConnect():

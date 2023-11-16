@@ -128,10 +128,10 @@ Amerikansk animerad komediserie från 2007. Säsong 19. Del 9 av 20. En morgon n
 regex_pattern = r'<td class="svtTablaTime">\s*(.*?)\s*<\/td>\s*(?:<td.*?>\s*<h4.*?>\s*.*?\s*<\/h4>\s*<div.*?>\s*<div.*?>\s*<div.*?>\s*<p.*?>\s*(.*?)\s*<\/p>\s*<\/div>\s*<\/div>\s*<\/div>\s*<\/td>)?'
 
 
-matches = re.finditer(regex_pattern, html_code, re.DOTALL) #iterator to match our regex with the html code. 
+matches = re.finditer(regex_pattern, html_code, re.DOTALL) #to match our regex with the html code. 
 
 for match in matches:
-    time = match.group(1)
+    time = match.group(1) #extract for the group1. 
     handling = match.group(2)
 
     # Extract season and episode information
