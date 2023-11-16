@@ -25,7 +25,7 @@ This program creates a basic HTTP server. It listens on a port and responds to i
 ### Description 
 A program that essentially sets up a basic chat server where multiple clients can connect and exchange messages in a chat room. The server acts as an intermediary that forwards messages from one client to all other connected clients. It uses non-blocking sockets to handle multiple clients simultaneously, and the communication is in plain text format.
 
-## Lab 8 GUI extended chat room 
+## Lab 8 GUI extended chat server
 ### Description
 This program allows multiple clients to connect to the server simultaneously and exchange messages in a simple chat environment. The server uses the select function to efficiently manage multiple connections without the need for separate threads or processes.
 
