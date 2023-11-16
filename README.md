@@ -25,6 +25,10 @@ This program creates a basic HTTP server. It listens on a port and responds to i
 ### Description 
 A program that essentially sets up a basic chat server where multiple clients can connect and exchange messages in a chat room. The server acts as an intermediary that forwards messages from one client to all other connected clients. It uses non-blocking sockets to handle multiple clients simultaneously, and the communication is in plain text format.
 
+## Lab 8 GUI extended chat room 
+### Description
+This program allows multiple clients to connect to the server simultaneously and exchange messages in a simple chat environment. The server uses the select function to efficiently manage multiple connections without the need for separate threads or processes.
+
 ## Lab 10 Email regex and Simpsons tv tabla regex
 ### Description 
 #### Task 1 & 2
@@ -32,6 +36,6 @@ Defines a function, is_valid_email(email), which utilizes a regular expression t
 #### Task 3
 Uses a regular expression (regex_pattern) to extract information about each the TV show Simpsons from a html file, such as the time, season, episode, and a brief description of the show. The program then iterates through the matches found in the HTML code and prints the extracted details for each TV show in a structured format.
 
-## Lab 11 
+## Lab 11 Creating a database from a text file
 ### Description 
 Establishes a connection to an SQLite database and creates two tables, 'persons' and 'scores'. It then reads data from the file ('score2.txt') and populates the tables with the parsed information, and performs two SQL queries. The first query retrieves the top 10 persons with the highest total points, while the second one identifies the 10 most difficult tasks based on minimal total points. The script also includes functions to print the contents of the 'persons' and 'scores' tables, as well as the results of the SQL queries.
