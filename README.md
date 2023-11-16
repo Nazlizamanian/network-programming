@@ -13,7 +13,7 @@ Implemented a function called fibbonacci(limit) that employs the 'yield' keyword
 
 
 ## Using network connections lab 5-12
-## Lab 5 
+## Lab 5 Rock Paper and Scissors game using socket
 ### Description
 A basic program that enables two users to engage in a simplified Rock, Paper and Scissors game through a network connection. One user can act as the server, while the other can be the client. The server is first intalized in order for the client to make a connection. Then they take turns making moves and determine the winner based on the game's rules. The game continues until one player accumulates 10 points, and the overall winner is declared.
 
@@ -21,9 +21,16 @@ A basic program that enables two users to engage in a simplified Rock, Paper and
 ### Description 
 This program creates a basic HTTP server. It listens on a port and responds to incoming HTTP requests with a simple HTML page that displays the client's response. 
 
-## Lab 7 
+## Lab 7 Basic chat server 
 ### Description 
 A program that essentially sets up a basic chat server where multiple clients can connect and exchange messages in a chat room. The server acts as an intermediary that forwards messages from one client to all other connected clients. It uses non-blocking sockets to handle multiple clients simultaneously, and the communication is in plain text format.
+
+## Lab 10 Email regex and Simpsons tv tabla regex
+### Description 
+#### Task 1 & 2
+Defines a function, is_valid_email(email), which utilizes a regular expression to check if a given email address adheres to a common format. The function prints whether each tested email address is valid or not based on the specified pattern, highlighting its conformance to typical email address structure.
+#### Task 3
+Uses a regular expression (regex_pattern) to extract information about each the TV show Simpsons from a html file, such as the time, season, episode, and a brief description of the show. The program then iterates through the matches found in the HTML code and prints the extracted details for each TV show in a structured format.
 
 ## Lab 11 
 ### Description 
