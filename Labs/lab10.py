@@ -30,10 +30,11 @@ re.findall(r"\s",txt) #spaces
 
 
 
-#Task 1 // Task 2??
+#Task 1 // Task 2
 def is_valid_email(email):
     
     email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    # @ = address symbol at sign.
     
     # Use re.match() to check if the email matches the pattern
     match = re.match(email_pattern, email)

@@ -117,7 +117,7 @@ def on_closing():
     else:
         myQuit()
 
-# when quitting, do it the nice way    
+# when quitting, do it the nice waynnect()    
 def myQuit():
     disconnect()
     g_root.destroy()
@@ -130,6 +130,7 @@ def myAddrFormat(addr):
 
 # disconnect from server (if connected) and
 # set the state of the programm to 'disconnected'
+#----
 def disconnect():
     # we need to modify the following global variables
     global g_bConnected
@@ -149,7 +150,8 @@ def disconnect():
     # once disconnected, set buttons text to 'connect'
     g_app.connectButton['text'] = 'connect'
     
-# attempt to connect to server    
+# attempt to connect to server  
+#_____  
 def tryToConnect():
     # we need to modify the following global variables
     global g_bConnected
@@ -161,7 +163,7 @@ def tryToConnect():
             port = int(port)
             g_sock = socket.create_connection((host, port), timeout=0.2)
             g_bConnected = True
-            g_app.connectButton['text'] = 'disconnect'
+            g_app.connectButton['text'] = 'disconnect' 
             printToMessages("Connected to server")
         except socket.error as e:
             printToMessages(f"Error connecting: {e}")
@@ -176,8 +178,8 @@ def tryToConnect():
 
 
 # attempt to send the message (in the text field g_app.textIn) to the server
-def sendMessage(master):
 
+def sendMessage(master):
     # your code here
     # a call to g_app.textIn.get() delivers the text field's content
     # if a socket.error occurrs, you may want to disconnect, in order
@@ -201,7 +203,6 @@ def pollMessages():
     global g_sock
     # reschedule the next polling event
     g_root.after(g_pollFreq, pollMessages)
-    
     
     # use the recv() function in non-blocking mode
     if g_bConnected:
