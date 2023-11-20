@@ -1,66 +1,51 @@
-#Lab7 Nazli Zamanian Gustavsson
-#Server sided 
 import socket
 import select
 
-IP = "0.0.0.0"  # Listen on all available network interfaces
-PORT = 60003
-HEADER_LENGTH = 10
+port = 60003
+sockL = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sockL.bind(("", port))
+sockL.listen(1)
+listOfSockets = [sockL]
 
-server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_socket.bind((IP, PORT))
-server_socket.listen()  
-
-list_of_sockets = [server_socket]
-clients = {}
-
-def send_message(client_socket, message):
-    try:
-        client_socket.send(message)
-    except Exception as e:
-        print(f"Error sending message: {str(e)}")
-
-def broadcast_message(sender_socket, message):
-    for client_socket in clients:
-        if client_socket != sender_socket:
-            send_message(client_socket, message)
-
-print(f"Listening on {IP}:{PORT}")
+print("Listening on port {}".format(port))
 
 while True:
-    read_sockets, _, _ = select.select(list_of_sockets, [], [])
+    readable, _, _ = select.select(listOfSockets, [], [])
 
-    for notified_socket in read_sockets:
-        if notified_socket == server_socket:
-            # A new client is trying to connect
-            client_socket, client_address = server_socket.accept()
-            list_of_sockets.append(client_socket)
+    for sock in readable:
+        if sock == sockL:
+            sockClient, addr = sockL.accept()
+            listOfSockets.append(sockClient)
 
-            # Notify existing clients about the new connection
-            for client in clients:
-                if client != server_socket:
-                    connection_message = f"[{client_address[0]}:{client_address[1]}] (connected)\n".encode('utf-8')
-                    send_message(client, connection_message)
+            # Notify all other clients about the new client
+            new_client_msg = "[{}:{}] (connected)\n".format(addr[0], addr[1])
+            for client in listOfSockets:
+                if client != sockL and client != sockClient:
+                    client.send(new_client_msg.encode())
 
-            clients[client_socket] = client_address
-            print(f"Accepted new connection from {client_address[0]}:{client_address[1]}")
-
+            # Print IP:Port connected to the server
+            print("{}:{} connected".format(addr[0], addr[1]))
         else:
-            # An existing client sent a message
-            client_socket = notified_socket
-            data = client_socket.recv(2048)
-
+            data = sock.recv(2048)
             if not data:
-                # Client disconnected
-                client_address = clients[client_socket]
-                del clients[client_socket]
-                list_of_sockets.remove(client_socket)
-                disconnect_message = f"[{client_address[0]}:{client_address[1]}] (disconnected)\n".encode('utf-8')
-                broadcast_message(client_socket, disconnect_message)
-                print(f"Connection from {client_address[0]}:{client_address[1]} closed")
+                # A client disconnects
+                addr = sock.getpeername()
+                sock.close()
+                listOfSockets.remove(sock)
+
+                # Notify all other clients about the disconnected client
+                disconnected_msg = "[{}:{}] disconnected\n".format(addr[0], addr[1])
+                for client in listOfSockets:
+                    if client != sockL:
+                        client.send(disconnected_msg.encode())
+              
+                print("{}:{} disconnected".format(addr[0], addr[1]))
             else:
-                # Broadcast the message to all connected clients
-                client_address = clients[client_socket]
-                message = f"[{client_address[0]}:{client_address[1]}] {data.decode('utf-8')}".encode('utf-8')
-                broadcast_message(client_socket, message)
-                print(f"Received message from {client_address[0]}:{client_address[1]}: {data.decode('utf-8')}")
+                # A client sends a message
+                addr = sock.getpeername()
+                message = "[{}:{}] {}".format(addr[0], addr[1], data.decode())
+
+                # Send the data to all clients except the sender
+                for client in listOfSockets:
+                    if client != sockL and client != sock:
+                        client.send(message.encode())

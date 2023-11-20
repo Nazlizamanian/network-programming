@@ -175,8 +175,6 @@ def tryToConnect():
     # if connection successful, set the program's state to 'connected'
     # (e.g. g_app.connectButton['text'] = 'disconnect' etc.)
 
-
-
 # attempt to send the message (in the text field g_app.textIn) to the server
 
 def sendMessage(master):
