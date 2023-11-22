@@ -1,25 +1,32 @@
 import socket
 import threading
 
+host = '127.0.0.1'
+port = 60003
+
 def receive_messages(sock):
     while True:
         try:
             data = sock.recv(2048)
             if not data:
-                # Server closed the connection
-                print("Disconnected from the server.")
+                
+                print(f"[{host}:{port}] Disconnected from the server.")
                 break
-            print(data.decode())
+            elif data.decode().endswith("disconnected\n"):
+                # A client disconnected
+                print(data.decode())
+                break
+            else:
+                print(data.decode())
         except socket.error as e:
             # An error occurred or the server closed the connection
             print(f"Error receiving data: {e}")
             break
 
+
+
 def run_client():
-    host = 'localhost'
-    port = 60003
-    
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock = socket.socket()
     sock.connect((host, port))
     
     print(f"[{host}:{port}] Connected to the server.")

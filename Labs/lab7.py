@@ -23,7 +23,6 @@ while True:
                 if client != sockL and client != sockClient:
                     client.send(new_client_msg.encode())
 
-            # Print IP:Port connected to the server
             print("{}:{} connected".format(addr[0], addr[1]))
         else:
             data = sock.recv(2048)
@@ -38,7 +37,7 @@ while True:
                 for client in listOfSockets:
                     if client != sockL:
                         client.send(disconnected_msg.encode())
-              
+
                 print("{}:{} disconnected".format(addr[0], addr[1]))
             else:
                 # A client sends a message
