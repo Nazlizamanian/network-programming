@@ -17,8 +17,8 @@ number_of_bytes= len(byteArr)
 print(f"Number of symbols in the string: {number_of_symbols}")
 print(f"Number of bytes in the byte array: {number_of_bytes}")
 print("\n")
-#number_of_symbols in the stirngs are: 29189
-#number_of_bytes in the byte array are: 31787
+#number_of_symbols in the strings are: 29 189
+#number_of_bytes in the byte array are: 31 787, å,ä,ö
 
 
 #2D
@@ -70,84 +70,72 @@ print("(c) Entropy:", entropy_value)
 print("(d) Theoretical Minimum Compression Size:", min_size)
 print("\n")
 
-
-
 #3 
 theCopy = bytearray(byteArr)
 random.shuffle(theCopy)
-
 # (c) Verify that byteArr is not shuffled
-print("Original byteArr:", byteArr)
-print("Shuffled copy (theCopy):", theCopy)
+# print("Original byteArr:", byteArr)
+# print("Shuffled copy (theCopy):", theCopy)
 print("\n")
 
-#4B 
-import zlib
 
-# Assuming theCopy is already defined from your previous code
 
-# (b) Zip-compress theCopy using zlib
+#4 C,D,E
+import zlib 
+print("4")
+
+#theCopy
 compressed_code_copy = zlib.compress(theCopy)
+print(f"Size of the original data (theCopy): {len(theCopy)} bytes")
+print(f"Size of the compressed data: {len(compressed_code_copy)} bytes\n")
 
-# Print the size of the original and compressed data for theCopy
-print(f"4\nSize of the original data (theCopy): {len(theCopy)} bytes")
-print(f"Size of the compressed data: {len(compressed_code_copy)} bytes")
-
-# (c) Calculate the size in bytes and bits, and the number of source symbols
 size_in_bytes_copy = len(compressed_code_copy)
 size_in_bits_copy = size_in_bytes_copy * 8
 number_of_symbols_copy = len(theCopy)
-
-# Calculate bits per symbol
 bits_per_symbol_copy = size_in_bits_copy / number_of_symbols_copy
+print(f"theCopy Number of source symbols : {number_of_symbols_copy}")
+print(f"theCopy Compression ratio (bits per symbol): {bits_per_symbol_copy:.2f} bits/symbol\n")
 
-# Print the results for theCopy
-print(f"Size of the compressed data: {size_in_bytes_copy} bytes")
-print(f"Size of the compressed data: {size_in_bits_copy} bits")
-print(f"Number of source symbols (theCopy): {number_of_symbols_copy}")
-print(f"Compression ratio (bits per symbol): {bits_per_symbol_copy:.2f} bits/symbol")
-print("\n")
 
-# Assuming byteArr is already defined from your previous code
 
-# (b) Zip-compress byteArr using zlib
+
+#byteArr (shuffled)
 compressed_code_original = zlib.compress(byteArr)
 
-# (c) Calculate the size in bytes and bits, and the number of source symbols for the original byteArr
 size_in_bytes_original = len(compressed_code_original)
 size_in_bits_original = size_in_bytes_original * 8
 number_of_symbols_original = len(byteArr)
-
-# Calculate bits per symbol for the original byteArr
 bits_per_symbol_original = size_in_bits_original / number_of_symbols_original
+print(f"ByteArr (Shuffled) Number of source symbols (original): {number_of_symbols_original}")
+print(f"ByteArr (Shuffled) Compression ratio (bits per symbol) for the original: {bits_per_symbol_original:.2f} bits/symbol\n")
 
-# Print the results for the original byteArr
-print(f"Size of the compressed data (original): {size_in_bytes_original} bytes")
-print(f"Size of the compressed data (original): {size_in_bits_original} bits")
-print(f"Number of source symbols (original): {number_of_symbols_original}")
-print(f"Compression ratio (bits per symbol) for the original: {bits_per_symbol_original:.2f} bits/symbol")
-print("---------------------------")
-
-#4D
-import zlib
-
-# (b) Zip-compress byteArr using zlib
-compressed_code_original = zlib.compress(byteArr)
-
-# Print the size of the original and compressed data for byteArr
-print(f"Size of the original data (byteArr): {len(byteArr)} bytes")
-print(f"Size of the compressed data: {len(compressed_code_original)} bytes")
-
-# (c) Calculate the size in bytes and bits, and the number of source symbols for byteArr
+#byteArr (unshuffled)
 size_in_bytes_original = len(compressed_code_original)
 size_in_bits_original = size_in_bytes_original * 8
 number_of_symbols_original = len(byteArr)
-
-# Calculate bits per symbol for byteArr
 bits_per_symbol_original = size_in_bits_original / number_of_symbols_original
 
-# Print the results for byteArr
-print(f"Size of the compressed data: {size_in_bytes_original} bytes")
-print(f"Size of the compressed data: {size_in_bits_original} bits")
-print(f"Number of source symbols (byteArr): {number_of_symbols_original}")
-print(f"Compression ratio (bits per symbol) for byteArr: {bits_per_symbol_original:.2f} bits/symbol")
+print(f"ByteArr (Unshuffled) Number of source symbols (byteArr): {number_of_symbols_original}")
+print(f"ByteArr (Unshuffled)Compression ratio (bits per symbol) for byteArr: {bits_per_symbol_original:.2f} bits/symbol\n")
+
+
+#5 
+print("5")
+import zlib 
+
+t1= """I hope this lab never ends because
+it is so incredibly thrilling!"""
+
+t10= t1*10
+
+print("t1: ", t1)
+print(f"Size of original data for t1: {len(t1.encode('utf-8'))} bytes")
+
+compressed_t1= zlib.compress(t1.encode("utf-8"))
+print(f"Size of compressed data for t1: {len(compressed_t1)} bytes")
+
+print("\nt10: ", t10)
+print(f"Size of original data for t10: {len(t10.encode('utf-8'))} bytes")
+
+compressed_t10= zlib.compress(t10.encode("utf-8"))
+print(f"Size of compressed data for t10: {len(compressed_t10)} bytes")

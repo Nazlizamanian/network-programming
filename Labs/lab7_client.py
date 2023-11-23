@@ -9,7 +9,6 @@ def receive_messages(sock):
         try:
             data = sock.recv(2048)
             if not data:
-                
                 print(f"[{host}:{port}] Disconnected from the server.")
                 break
             elif data.decode().endswith("disconnected\n"):
