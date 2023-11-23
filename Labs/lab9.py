@@ -3,7 +3,8 @@ import random
 import zlib  
 
 file_path = 'exempeltext.txt'
-#1C 
+#1C  How many symbols does the string contain? How many bytes
+#does the byte-array contain?
 with open(file_path, 'rb') as file:
     bytes_content = file.read()
     txt = bytes_content.decode("utf-8", errors= "replace")
@@ -11,10 +12,10 @@ with open(file_path, 'rb') as file:
 byteArr = bytearray(txt, "utf-8")
     
 number_of_symbols= len(txt)
-    
 number_of_bytes= len(byteArr)
     
 print(f"Number of symbols in the string: {number_of_symbols}")
+
 print(f"Number of bytes in the byte array: {number_of_bytes}")
 print("\n")
 #number_of_symbols in the strings are: 29 189
@@ -42,6 +43,10 @@ def entropy(prob):
             entropy_value -= p * math.log2(p)
     return entropy_value
 
+#Down to how many bytes should it be possible to compress the
+#byte-array byteArr if we treat it as a memory-free source (i.e.,
+#we do not exploit statistical redundancy) but use an optimal Answer!
+#encoding?
 # (d) Function to calculate the theoretical minimum size for compression
 def min_compression_size(byteArr):
     return len(set(byteArr)) * 8
@@ -81,8 +86,12 @@ print("\n")
 
 
 #4 C,D,E
+#Now you have three different numbers of bits/symbol: (a) the
+#data source's entropy, (b) the zlib-encoding of theCopy, and (c)
+#the zlib-encoding of byteArr. Which one is the smallest number? Answer!
+#Which one is the highest number? Explain why!
 import zlib 
-print("4")
+print("4-----------------------------------------------------------------")
 
 #theCopy
 print(f"Size of the original data (theCopy): {len(theCopy)} bytes")
@@ -91,9 +100,9 @@ compressed_theCopy = zlib.compress(theCopy)
 print(f"Size of the compressed data: {len(compressed_theCopy)} bytes\n")
 
 size_in_bytes_copy = len(compressed_theCopy)
-size_in_bits_copy = size_in_bytes_copy * 8
-number_of_symbols_theCopy = len(theCopy)
-bits_per_symbol_theCopy = size_in_bits_copy / number_of_symbols_theCopy
+size_in_bits_copy = size_in_bytes_copy * 8 #amount of bits
+number_of_symbols_theCopy = len(theCopy) #amount of symbols
+bits_per_symbol_theCopy = size_in_bits_copy / number_of_symbols_theCopy #compression ratio
 print(f"theCopy Number of source symbols : {number_of_symbols_theCopy}")
 print(f"theCopy Compression ratio (bits per symbol): {bits_per_symbol_theCopy:.2f} bits/symbol\n")
 
@@ -107,21 +116,21 @@ size_in_bits_original = size_in_bytes_original * 8
 number_of_symbols_original = len(byteArr)
 bits_per_symbol_original = size_in_bits_original / number_of_symbols_original
 
-# print(f"ByteArr (Shuffled) Number of source symbols (original): {number_of_symbols_original}")
-# print(f"ByteArr (Shuffled) Compression ratio (bits per symbol) for the original: {bits_per_symbol_original:.2f} bits/symbol\n")
+print(f"ByteArr (Shuffled) Number of source symbols (original): {number_of_symbols_original}")
+print(f"ByteArr (Shuffled) Compression ratio (bits per symbol) for the original: {bits_per_symbol_original:.2f} bits/symbol\n")
 
 #byteArr (unshuffled)
-size_in_bytes_original = len(compressed_code_original)
-size_in_bits_original = size_in_bytes_original * 8
-number_of_symbols_original = len(byteArr)
-bits_per_symbol_original = size_in_bits_original / number_of_symbols_original
+# size_in_bytes_original = len(compressed_code_original)
+# size_in_bits_original = size_in_bytes_original * 8
+# number_of_symbols_original = len(byteArr)
+# bits_per_symbol_original = size_in_bits_original / number_of_symbols_original
 
-print(f"ByteArr (Unshuffled) Number of source symbols (byteArr): {number_of_symbols_original}")
-print(f"ByteArr (Unshuffled)Compression ratio (bits per symbol) for byteArr: {bits_per_symbol_original:.2f} bits/symbol\n")
+# print(f"ByteArr (Unshuffled) Number of source symbols (byteArr): {number_of_symbols_original}")
+# print(f"ByteArr (Unshuffled)Compression ratio (bits per symbol) for byteArr: {bits_per_symbol_original:.2f} bits/symbol\n")
 
 
 #5 
-print("5")
+print("5-----------------------------------------------------------------")
 import zlib 
 
 t1= """I hope this lab never ends because

@@ -11,18 +11,12 @@ def receive_messages(sock):
             if not data:
                 print(f"[{host}:{port}] Disconnected from the server.")
                 break
-            elif data.decode().endswith("disconnected\n"):
-                # A client disconnected
-                print(data.decode())
-                break
             else:
                 print(data.decode())
         except socket.error as e:
             # An error occurred or the server closed the connection
             print(f"Error receiving data: {e}")
             break
-
-
 
 def run_client():
     sock = socket.socket()
