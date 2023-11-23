@@ -101,9 +101,18 @@ def connectHandler(master):
 
       
 def printToMessages(message):
+    global g_bConnected
+    global g_sock
+
     g_app.msgText.configure(state=tk.NORMAL)
-    g_app.msgText.insert(tk.END, message + '\n')
-    # scroll to the end, so the new message is visible at the bottom
+    # Check if the message contains the IP address and port
+    if '[localhost' in message:
+        # Extract the IP address and port from the message
+        ip_port_str = message.split('[')[1].split(']')[0]
+        ip, port = ip_port_str.split(':')
+        g_app.msgText.insert(tk.END, f"From {ip}:{port}: {message}\n")
+    else:
+        g_app.msgText.insert(tk.END, message + '\n')
     g_app.msgText.see(tk.END)
     g_app.msgText.configure(state=tk.DISABLED)
 
@@ -145,7 +154,7 @@ def disconnect():
         
         g_bConnected = False
         g_app.connectButton['text'] = 'connect'
-        printToMessages("Disconnected")
+        printToMessages(f"Disconnected")
 
     # once disconnected, set buttons text to 'connect'
     g_app.connectButton['text'] = 'connect'
@@ -178,18 +187,18 @@ def tryToConnect():
 # attempt to send the message (in the text field g_app.textIn) to the server
 
 def sendMessage(master):
-    # your code here
-    # a call to g_app.textIn.get() delivers the text field's content
-    # if a socket.error occurrs, you may want to disconnect, in order
-    # to put the program into a defined state
     global g_bConnected
     global g_sock
 
     if g_bConnected:
         try:
             message = g_app.textIn.get()
-            g_sock.sendall(message.encode())
-            printToMessages(f"Sent: {message}")
+            # Get the IP address and port of the connected client
+            client_ip, client_port = g_sock.getpeername()
+            # Append the IP address and port to the message
+            message_with_ip = f"[{client_ip}:{client_port}] {message}"
+            g_sock.sendall(message_with_ip.encode())
+            printToMessages(f"Sent: {message_with_ip}")
         except socket.error as e:
             printToMessages(f"Error sending message: {e}")
             disconnect()
