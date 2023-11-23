@@ -198,7 +198,7 @@ def sendMessage(master):
             # Append the IP address and port to the message
             message_with_ip = f"[{client_ip}:{client_port}] {message}"
             g_sock.sendall(message_with_ip.encode())
-            printToMessages(f"Sent: {message_with_ip}")
+            printToMessages(f"{message_with_ip} ")
         except socket.error as e:
             printToMessages(f"Error sending message: {e}")
             disconnect()
