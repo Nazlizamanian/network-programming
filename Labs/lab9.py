@@ -85,29 +85,30 @@ import zlib
 print("4")
 
 #theCopy
-compressed_code_copy = zlib.compress(theCopy)
 print(f"Size of the original data (theCopy): {len(theCopy)} bytes")
-print(f"Size of the compressed data: {len(compressed_code_copy)} bytes\n")
 
-size_in_bytes_copy = len(compressed_code_copy)
+compressed_theCopy = zlib.compress(theCopy)
+print(f"Size of the compressed data: {len(compressed_theCopy)} bytes\n")
+
+size_in_bytes_copy = len(compressed_theCopy)
 size_in_bits_copy = size_in_bytes_copy * 8
-number_of_symbols_copy = len(theCopy)
-bits_per_symbol_copy = size_in_bits_copy / number_of_symbols_copy
-print(f"theCopy Number of source symbols : {number_of_symbols_copy}")
-print(f"theCopy Compression ratio (bits per symbol): {bits_per_symbol_copy:.2f} bits/symbol\n")
-
-
+number_of_symbols_theCopy = len(theCopy)
+bits_per_symbol_theCopy = size_in_bits_copy / number_of_symbols_theCopy
+print(f"theCopy Number of source symbols : {number_of_symbols_theCopy}")
+print(f"theCopy Compression ratio (bits per symbol): {bits_per_symbol_theCopy:.2f} bits/symbol\n")
 
 
 #byteArr (shuffled)
-compressed_code_original = zlib.compress(byteArr)
+print(f"Size of the original data (byte Arr): {len(byteArr)} bytes")
 
+compressed_code_original = zlib.compress(byteArr)
 size_in_bytes_original = len(compressed_code_original)
 size_in_bits_original = size_in_bytes_original * 8
 number_of_symbols_original = len(byteArr)
 bits_per_symbol_original = size_in_bits_original / number_of_symbols_original
-print(f"ByteArr (Shuffled) Number of source symbols (original): {number_of_symbols_original}")
-print(f"ByteArr (Shuffled) Compression ratio (bits per symbol) for the original: {bits_per_symbol_original:.2f} bits/symbol\n")
+
+# print(f"ByteArr (Shuffled) Number of source symbols (original): {number_of_symbols_original}")
+# print(f"ByteArr (Shuffled) Compression ratio (bits per symbol) for the original: {bits_per_symbol_original:.2f} bits/symbol\n")
 
 #byteArr (unshuffled)
 size_in_bytes_original = len(compressed_code_original)
@@ -139,3 +140,5 @@ print(f"Size of original data for t10: {len(t10.encode('utf-8'))} bytes")
 
 compressed_t10= zlib.compress(t10.encode("utf-8"))
 print(f"Size of compressed data for t10: {len(compressed_t10)} bytes")
+
+

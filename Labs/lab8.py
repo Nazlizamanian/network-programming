@@ -30,7 +30,7 @@ while True:
             data = sock.recv(1024)
             if not data:
                 # Client disconnected
-                print(f"Client {sock.getpeername()} disconnected")
+                print(f"{client_address} Client {sock.getpeername()} disconnected")
                 sock.close()
                 clients.remove(sock)
                 
