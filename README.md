@@ -29,7 +29,10 @@ A program that essentially sets up a basic chat server where multiple clients ca
 ### Description
 This program allows multiple clients to connect to the server simultaneously and exchange messages in a simple chat environment. The server uses the select function to efficiently manage multiple connections without the need for separate threads or processes.
 
-## Lab 10 Email regex and Simpsons tv tabla regex
+## Lab 9 Data Compression 
+### Description 
+
+## Lab 10 Email and Simpsons tv tabla regular expressions
 ### Description 
 #### Task 1 & 2
 Defines a function, is_valid_email(email), which utilizes a regular expression to check if a given email address adheres to a common format. The function prints whether each tested email address is valid or not based on the specified pattern, highlighting its conformance to typical email address structure.
