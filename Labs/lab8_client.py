@@ -145,13 +145,13 @@ def disconnect():
     global g_bConnected
     global g_sock
     
-    if g_bConnected:
+    if g_bConnected: 
         try:
             g_sock.shutdown(socket.SHUT_RDWR)
             g_sock.close()
         except socket.error as e:
             printToMessages(f"Error disconnecting: {e}")
-        
+            
         g_bConnected = False
         g_app.connectButton['text'] = 'connect'
         printToMessages(f"Disconnected")
@@ -168,7 +168,7 @@ def tryToConnect():
     
     if not g_bConnected:
         try:
-            host, port = g_app.ipPort.get().split(":")
+            host, port = g_app.ipPort.get().split(":") #extrac Ip & Port from IP:Port string.
             port = int(port)
             g_sock = socket.create_connection((host, port), timeout=0.2)
             g_bConnected = True
@@ -192,7 +192,8 @@ def sendMessage(master):
 
     if g_bConnected:
         try:
-            message = g_app.textIn.get()
+            message = g_app.textIn.get() #message from input field.
+            
             # Get the IP address and port of the connected client
             client_ip, client_port = g_sock.getpeername()
             # Append the IP address and port to the message

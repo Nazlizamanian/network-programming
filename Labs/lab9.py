@@ -49,7 +49,7 @@ def entropy(prob):
 #encoding?
 # (d) Function to calculate the theoretical minimum size for compression
 def min_compression_size(byteArr):
-    return len(set(byteArr)) * 8
+    return len(set(byteArr)) * 8 #624bits (78bytes)
 
 with open(file_path, 'rb') as file:
     bytes_content = file.read()
