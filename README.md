@@ -29,6 +29,9 @@ A program that essentially sets up a basic chat server where multiple clients ca
 ### Description
 This program allows multiple clients to connect to the server simultaneously and exchange messages in a simple chat environment. The server uses the select function to efficiently manage multiple connections without the need for separate threads or processes.
 
+## Lab 9 Data Compression 
+### Description 
+
 ## Lab 10 Email regex and Simpsons tv tabla regex
 ### Description 
 #### Task 1 & 2
