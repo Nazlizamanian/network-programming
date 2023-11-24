@@ -32,7 +32,7 @@ This program allows multiple clients to connect to the server simultaneously and
 ## Lab 9 Data Compression 
 ### Description 
 
-## Lab 10 Email and Simpsons tv tabla regular expressio
+## Lab 10 Email and Simpsons tv tabla regular expressions
 ### Description 
 #### Task 1 & 2
 Defines a function, is_valid_email(email), which utilizes a regular expression to check if a given email address adheres to a common format. The function prints whether each tested email address is valid or not based on the specified pattern, highlighting its conformance to typical email address structure.
