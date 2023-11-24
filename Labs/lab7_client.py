@@ -1,3 +1,4 @@
+#Lab 7 Nazli Zamanian Gustavsson Client
 import socket
 import threading
 

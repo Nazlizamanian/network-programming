@@ -1,3 +1,4 @@
+#Lab 7 Nazli Zamanian Gustavsson
 import math
 import random
 import zlib  
@@ -90,6 +91,7 @@ print("\n")
 #data source's entropy, (b) the zlib-encoding of theCopy, and (c)
 #the zlib-encoding of byteArr. Which one is the smallest number? Answer!
 #Which one is the highest number? Explain why!
+#zip compressin the byteArray, shuffled, and a theCopy 
 import zlib 
 print("4-----------------------------------------------------------------")
 

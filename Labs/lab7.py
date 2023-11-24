@@ -13,7 +13,7 @@ print("Listening on port {}".format(port))
 while True:
     readable, _, _ = select.select(listOfSockets, [], [])
 
-    for sock in readable:
+    for sock in readable: #client wants to connect.
         if sock == sockL:
             sockClient, addr = sockL.accept()
             listOfSockets.append(sockClient)
