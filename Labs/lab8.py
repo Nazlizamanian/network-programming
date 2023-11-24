@@ -1,48 +1,51 @@
-#Lab8 Nazli Zamanian Gustavsson
+#Lab 7 Nazli Zamanian Gustavsson
 import socket
 import select
 
-server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_socket.bind(('localhost', 60003))
-server_socket.listen()
+port = 60003
+sockL = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sockL.bind(("", port))
+sockL.listen(1)
+listOfSockets = [sockL]
 
-clients = [server_socket]
-
-print('Server listening on port 60003...')
+print("Listening on port {}".format(port))
 
 while True:
-    # Use select to handle multiple connections
-    readable, _, _ = select.select(clients, [], [])
+    readable, _, _ = select.select(listOfSockets, [], [])
 
-    for sock in readable:
-        if sock == server_socket:
-            # New client connection
-            client_socket, client_address = server_socket.accept()
-            clients.append(client_socket)
-            print(f"New connection from {client_address}")
-            
-            # Broadcast a welcome message to all clients
-            welcome_message = f"Client {client_address} joined the chat"
-            for client in clients[1:]:
-                client.sendall(welcome_message.encode())
+    for sock in readable: #client wants to connect.
+        if sock == sockL:
+            sockClient, addr = sockL.accept()
+            listOfSockets.append(sockClient)
+
+            # Notify all other clients about the new client
+            new_client_msg = "[{}:{}] (connected)\n".format(addr[0], addr[1])
+            for client in listOfSockets:
+                if client != sockL and client != sockClient:
+                    client.send(new_client_msg.encode())
+
+            print("{}:{} connected".format(addr[0], addr[1]))
         else:
-            # Incoming data from a client
-            data = sock.recv(1024)
+            data = sock.recv(2048)
             if not data:
-                # Client disconnected
-                print(f"{client_address} Client {sock.getpeername()} disconnected")
+                # A client disconnects
+                addr = sock.getpeername()
                 sock.close()
-                clients.remove(sock)
-                
-                # Broadcast a leave message to all clients
-                leave_message = f"Client {sock.getpeername()} left the chat"
-                for client in clients[1:]:
-                    client.sendall(leave_message.encode())
-            else:
-                # Broadcast the message to all clients
-                print(f"Received: {data.decode()}")
-                for client in clients[1:]:
-                    client.sendall(data)
+                listOfSockets.remove(sock)
 
-# Close the server socket
-server_socket.close()
+                # Notify all other clients about the disconnected client
+                disconnected_msg = "[{}:{}] disconnected\n".format(addr[0], addr[1])
+                for client in listOfSockets:
+                    if client != sockL:
+                        client.send(disconnected_msg.encode())
+
+                print("{}:{} disconnected".format(addr[0], addr[1]))
+            else:
+                # A client sends a message
+                addr = sock.getpeername()
+                message = "[{}:{}] {}".format(addr[0], addr[1], data.decode())
+
+                # Send the data to all clients except the sender
+                for client in listOfSockets:
+                    if client != sockL and client != sock:
+                        client.send(message.encode())

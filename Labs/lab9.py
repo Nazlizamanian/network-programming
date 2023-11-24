@@ -79,9 +79,9 @@ print("\n")
 #3 
 theCopy = bytearray(byteArr)
 random.shuffle(theCopy)
-# (c) Verify that byteArr is not shuffled
-# print("Original byteArr:", byteArr)
-# print("Shuffled copy (theCopy):", theCopy)
+#(c) Verify that byteArr is not shuffled
+print("Original byteArr:", byteArr)
+print("Shuffled copy (theCopy):", theCopy)
 print("\n")
 
 
@@ -109,10 +109,11 @@ print(f"theCopy Number of source symbols : {number_of_symbols_theCopy}")
 print(f"theCopy Compression ratio (bits per symbol): {bits_per_symbol_theCopy:.2f} bits/symbol\n")
 
 
-#byteArr (shuffled)
+#byteArr (shuffled) takes more place, because their is no pattern to look at. 
 print(f"Size of the original data (byte Arr): {len(byteArr)} bytes")
 
 compressed_code_original = zlib.compress(byteArr)
+
 size_in_bytes_original = len(compressed_code_original)
 size_in_bits_original = size_in_bytes_original * 8
 number_of_symbols_original = len(byteArr)
