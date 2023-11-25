@@ -31,6 +31,7 @@ This program allows multiple clients to connect to the server simultaneously and
 
 ## Lab 9 Data Compression 
 ### Description 
+Calculating the entrophy and compressing data shuffeld and unshuffled to measure the differences using zlib algorthims and the efficency. A higher entropy suggests more unpredictability and less redundancy, whereas lower entropy implies patterns and more predictability. Shuffled data typically lacks patterns or redundancy, making it less compressible, while unshuffled data may have repeating patterns, potentially resulting in better compression. Analyzing the compression ratios and sizes of compressed data.
 
 ## Lab 10 Email and Simpsons tv tabla regular expressions
 ### Description 
