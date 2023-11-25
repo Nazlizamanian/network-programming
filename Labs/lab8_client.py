@@ -1,4 +1,4 @@
-
+#Lab 8 Nazli Zamanian gustavsson
 import tkinter as tk
 import tkinter.messagebox as tkmsgbox
 import tkinter.scrolledtext as tksctxt
@@ -41,7 +41,6 @@ class Application(tk.Frame):
         self.clearButton = tk.Button(self.groupCon, text='clr msg',
             command = clearButtonClick)
         self.clearButton.pack(side="left")
-
         
         #-------------------------------------------------------------------
         # row 2: the message field (chat messages + status messages)
@@ -50,7 +49,6 @@ class Application(tk.Frame):
             state=tk.DISABLED)
         self.msgText.pack(side="top")
 
-        
         #-------------------------------------------------------------------
         # row 3: sending messages
         #-------------------------------------------------------------------
@@ -73,7 +71,6 @@ class Application(tk.Frame):
             command = sendButtonClick)
         self.sendButton.pack(side="left")
         
-        
         # set the focus on the IP and Port text field
         self.ipPort.focus_set()
 
@@ -84,12 +81,10 @@ def clearButtonClick():
     g_app.msgText.configure(state=tk.DISABLED)
 
 def connectButtonClick():
-    # forward to the connect handler
-    connectHandler(g_app)
+    connectHandler(g_app)  # forward to the connect handler
 
 def sendButtonClick():
-    # forward to the sendMessage method
-    sendMessage(g_app)
+    sendMessage(g_app)  # forward to the sendMessage method
 
 # the connectHandler toggles the status between connected/disconnected
 def connectHandler(master):
@@ -106,8 +101,7 @@ def printToMessages(message):
     g_app.msgText.see(tk.END)
     g_app.msgText.configure(state=tk.DISABLED)
 
-# if attempt to close the window, it is handled here
-def on_closing():
+def on_closing(): # if attempt to close the window, it is handled here
     if g_bConnected:
         if tkmsgbox.askokcancel("Quit",
             "You are still connected. If you quit you will be"
@@ -116,34 +110,28 @@ def on_closing():
     else:
         myQuit()
 
-# when quitting, do it the nice way    
 def myQuit():
     disconnect()
     g_root.destroy()
 
-# utility address formatting
-def myAddrFormat(addr):
+def myAddrFormat(addr): # utility address formatting
     return '{}:{}'.format(addr[0], addr[1])
 
 
-
 # disconnect from server (if connected) and
-# set the state of the programm to 'disconnected'
 def disconnect():
-    # we need to modify the following global variables
     global g_bConnected
     global g_sock
-
-
-    # your code here
-
-    # once disconnected, set buttons text to 'connect'
+    
+    if g_sock:
+        g_sock.close()
+        g_sock = None 
+        g_bConnected = False 
     g_app.connectButton['text'] = 'connect'
 
     
 # attempt to connect to server    
 def tryToConnect():
-    # we need to modify the following global variables
     global g_bConnected
     global g_sock
 
@@ -153,52 +141,60 @@ def tryToConnect():
     # a call to g_app.ipPort.get() delivers the text field's content
     # if connection successful, set the program's state to 'connected'
     # (e.g. g_app.connectButton['text'] = 'disconnect' etc.)
+    try:
+        # Get IP address and port number from the text field
+        ip, port_str = g_app.ipPort.get().split(':')
+        port = int(port_str)
 
+        # Create and connect the socket
+        g_sock = socket.create_connection((ip, port))
 
+        # Update connection state and UI
+        g_bConnected = True
+        g_sock.setblocking(False)
+        g_app.connectButton['text'] = 'Disconnect'
+
+    except (socket.error, ValueError) as e:
+        # Handle specific exceptions (e.g., display an error message)
+        print(f"Connection failed: {e}")
+        raise RuntimeError('Connection failed')
 
 # attempt to send the message (in the text field g_app.textIn) to the server
 def sendMessage(master):
-
-    # your code here
     # a call to g_app.textIn.get() delivers the text field's content
     # if a socket.error occurrs, you may want to disconnect, in order
     # to put the program into a defined state
-    pass
+    try:
+        g_sock.sendall(g_app.textIn.get().encode('utf-8'))
 
-
-# poll messages
+    except socket.error as e:
+        print(f"Error sending message:{e}")
+        disconnect()
+   
 def pollMessages():
-    # reschedule the next polling event
-    g_root.after(g_pollFreq, pollMessages)
-    
-    # your code here
+    g_root.after(g_pollFreq, pollMessages) # reschedule the next polling event
+    try:
+        message = g_sock.recv(2048)
+        if message:
+            print(message)
+            printToMessages(message.decode('utf-8'))
+    except socket.error as e:
+        print(f"Error sending message:{e}")
     # use the recv() function in non-blocking mode
-    # catch a socket.error exception, indicating that no data is available
 
-
-
-
-
-# by default we are not connected
-g_bConnected = False
+g_bConnected = False # by default we are not connected
 g_sock = None
 
-# set the delay between two consecutive calls to pollMessages
-g_pollFreq = 200 # in milliseconds
+g_pollFreq = 200 # in milliseconds, dealy between 2 consecutive calls to pollMessages
 
-# launch the gui
-g_root = tk.Tk()
+g_root = tk.Tk() # launch the gui
 g_app = Application(master=g_root)
 
-# make sure everything is set to the status 'disconnected' at the beginning
 disconnect()
 
 # schedule the next call to pollMessages
 g_root.after(g_pollFreq, pollMessages)
 
-# if attempt to close the window, handle it in the on-closing method
 g_root.protocol("WM_DELETE_WINDOW", on_closing)
 
-# start the main loop
-# (which handles the gui and will frequently call pollMessages)
 g_app.mainloop()

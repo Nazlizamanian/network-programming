@@ -1,4 +1,4 @@
-#Lab 7 Nazli Zamanian Gustavsson
+#Lab 8 Nazli Zamanian Gustavsson
 import socket
 import select
 
