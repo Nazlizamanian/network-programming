@@ -31,6 +31,7 @@ This program allows multiple clients to connect to the server simultaneously and
 
 ## Lab 9 Data Compression 
 ### Description 
+Calculating the entrophy and compressing data shuffeld and unshuffled to measure the differences using zlib algorthims and the efficency. A higher entropy suggests more unpredictability and less redundancy, whereas lower entropy implies patterns and more predictability. Shuffled data typically lacks patterns or redundancy, making it less compressible, while unshuffled data may have repeating patterns, potentially resulting in better compression. Analyzing the compression ratios and sizes of compressed data.
 
 ## Lab 10 Email and Simpsons tv tabla regular expressions
 ### Description 
@@ -42,3 +43,6 @@ Uses a regular expression (regex_pattern) to extract information about each the 
 ## Lab 11 Creating a database from a text file
 ### Description 
 Establishes a connection to an SQLite database and creates two tables, 'persons' and 'scores'. It then reads data from the file ('score2.txt') and populates the tables with the parsed information, and performs two SQL queries. The first query retrieves the top 10 persons with the highest total points, while the second one identifies the 10 most difficult tasks based on minimal total points. The script also includes functions to print the contents of the 'persons' and 'scores' tables, as well as the results of the SQL queries.
+
+## Lab 12 Firebase 
+### Description 
