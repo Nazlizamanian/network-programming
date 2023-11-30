@@ -1,17 +1,46 @@
 #12 Nazli Zamanian Gustavsson
-
-import firebase_admin 
-from firebase_admin import  credentials, initialize_app, db 
 import tkinter as tk
-from tkinter import scrolledtext
+import tkinter.messagebox as tkmsgbox
+import tkinter.scrolledtext as tksctxt
+import firebase_admin
+from firebase_admin import db
 
-# Firebase initialization
-json_file_path = "C:\\Users\\nazli\\OneDrive\\Dokument\\University\\yearTwo\\NetworkProgramming\\Labs\\lab12-9e351-firebase-adminsdk-aqemq-dc3cfed443.json"
 
-cred = credentials.Certificate(json_file_path)
-firebase_admin.initialize_app(cred, {'databaseURL': 'https://lab12-9e351-default-rtdb.firebaseio.com/'})
-ref = db.reference('/messages')
+#create database object.
+cred = firebase_admin.credentials.Certificate('lab12network-key.json')
+url="https://lab12network-23d3e-default-rtdb.europe-west1.firebasedatabase.app/"
+firebase_admin.initialize_app(cred, {'databaseURL': url})
+ref = firebase_admin.db.reference('/')
 
+#Add entry 
+#ref.push(newData)
+
+newMessage= {'name': 'Nazli', 'text': 'Hello world!'}
+ref.child('messages').push(newMessage)
+
+def handleMessage(message):
+    print(message)
+    
+def streamHandler(incomingData):
+    if incomingData.event_type == 'put':
+        if incomingData.path == '/':
+        # This is the very first reading just after subscription:
+        # we get all messages or None (if no messages exists).
+         if incomingData.data != None:
+            for key in incomingData.data:
+                message = incomingData.data[key]
+                handleMessage(message)
+    else:
+        # Not the first reading.
+        # Someone wrote a new message that we just got.
+        message = incomingData.data
+        handleMessage(message)
+
+#subscribe to pushers reagarding the messages with:
+messages_stream = ref.child('messages').listen(streamHandler)    
+
+#unsubscribe with
+#messages_stream.close()    
 
 class Application(tk.Frame):
     def __init__(self, master=None):
