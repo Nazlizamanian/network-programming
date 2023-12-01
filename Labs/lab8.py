@@ -45,7 +45,7 @@ while True:
                 addr = sock.getpeername()
                 message = "[{}:{}] {}".format(addr[0], addr[1], data.decode())
 
-                # Send the data to all clients except the sender
+
                 for client in listOfSockets:
                     if client != sockL and client != sock:
                         client.send(message.encode())

@@ -1,4 +1,4 @@
-#Lab 8 Nazli Zamanian gustavsson
+#Lab8 Nazli Zamanian gustavsson
 import tkinter as tk
 import tkinter.messagebox as tkmsgbox
 import tkinter.scrolledtext as tksctxt
@@ -34,10 +34,8 @@ class Application(tk.Frame):
         self.connectButton = tk.Button(self.groupCon,
             command = connectButtonClick, width=10)
         self.connectButton.pack(side="left")
-        #
         padder = tk.Label(self.groupCon, padx=1)
         padder.pack(side="left")
-        #
         self.clearButton = tk.Button(self.groupCon, text='clr msg',
             command = clearButtonClick)
         self.clearButton.pack(side="left")
@@ -54,10 +52,8 @@ class Application(tk.Frame):
         #-------------------------------------------------------------------
         self.groupSend = tk.LabelFrame(bd=0)
         self.groupSend.pack(side="top")
-        #
         self.textInLbl = tk.Label(self.groupSend, text='message', padx=10)
         self.textInLbl.pack(side="left")
-        #
         self.textIn = tk.Entry(self.groupSend, width=38)
         # if the focus is on this text field and you hit 'Enter',
         # it should (try to) send
@@ -123,24 +119,21 @@ def disconnect():
     global g_bConnected
     global g_sock
     
-    if g_sock:
+    if g_sock: #check if connected 
         g_sock.close()
-        g_sock = None 
+        g_sock = None #no active socket connection
         g_bConnected = False 
-    g_app.connectButton['text'] = 'connect'
+    g_app.connectButton['text'] = 'connect' #updated GUI
 
     
-# attempt to connect to server    
+# when a user clicks on the button connect   
 def tryToConnect():
     global g_bConnected
     global g_sock
-
-    # your code here
     # try to connect to the IP address and port number
     # as indicated by the text field g_app.ipPort
     # a call to g_app.ipPort.get() delivers the text field's content
     # if connection successful, set the program's state to 'connected'
-    # (e.g. g_app.connectButton['text'] = 'disconnect' etc.)
     try:
         # Get IP address and port number from the text field
         ip, port_str = g_app.ipPort.get().split(':')
@@ -149,13 +142,12 @@ def tryToConnect():
         # Create and connect the socket
         g_sock = socket.create_connection((ip, port))
 
-        # Update connection state and UI
+        # Update connection state and GUI
         g_bConnected = True
         g_sock.setblocking(False)
         g_app.connectButton['text'] = 'Disconnect'
 
     except (socket.error, ValueError) as e:
-        # Handle specific exceptions (e.g., display an error message)
         print(f"Connection failed: {e}")
         raise RuntimeError('Connection failed')
 
@@ -165,22 +157,21 @@ def sendMessage(master):
     # if a socket.error occurrs, you may want to disconnect, in order
     # to put the program into a defined state
     try:
-        g_sock.sendall(g_app.textIn.get().encode('utf-8'))
+        g_sock.sendall(g_app.textIn.get().encode('utf-8')) #reesives the message from text input field & sends message using sendall.
 
     except socket.error as e:
         print(f"Error sending message:{e}")
-        disconnect()
-   
+        disconnect()   
+        
 def pollMessages():
-    g_root.after(g_pollFreq, pollMessages) # reschedule the next polling event
+    g_root.after(g_pollFreq, pollMessages) # schedule the next execution of this function.
     try:
-        message = g_sock.recv(2048)
+        message = g_sock.recv(2048) #try to revice x amount of data from socket,
         if message:
-            print(message)
+            print(message)  #we will print out and decode message.
             printToMessages(message.decode('utf-8'))
-    except socket.error as e:
-        print(f"Error sending message:{e}")
-    # use the recv() function in non-blocking mode
+    except:
+        pass
 
 g_bConnected = False # by default we are not connected
 g_sock = None
@@ -197,4 +188,4 @@ g_root.after(g_pollFreq, pollMessages)
 
 g_root.protocol("WM_DELETE_WINDOW", on_closing)
 
-g_app.mainloop()
+g_app.mainloop() 
