@@ -1,4 +1,4 @@
-#Lab 12 Nazli Zamanian Gustavsson
+#Lab 12 Nazli Zamanian
 import tkinter as tk
 import tkinter.scrolledtext as tksctxt
 import firebase_admin
@@ -20,7 +20,7 @@ class Application(tk.Frame):
         self.groupCon = tk.LabelFrame(bd=0)
         self.groupCon.pack(side="top")
 
-        self.ipPortLbl = tk.Label(self.groupCon, text='Firebase URL', padx=10)
+        self.ipPortLbl = tk.Label(self.groupCon, text='Name', padx=10)
         self.ipPortLbl.pack(side="left")
 
         self.ipPort = tk.Entry(self.groupCon, width=40)
@@ -29,9 +29,6 @@ class Application(tk.Frame):
 
         padder = tk.Label(self.groupCon, padx=5)
         padder.pack(side="left")
-
-        self.connectButton = tk.Button(self.groupCon, text='Connect', command=self.connectButtonClick)
-        self.connectButton.pack(side="left")
 
         padder = tk.Label(self.groupCon, padx=1)
         padder.pack(side="left")
@@ -65,15 +62,19 @@ class Application(tk.Frame):
 
     def clearButtonClick(self):
         ref.delete()  # Clear all messages in the Firebase database
-
+        self.msgText.configure(state=tk.NORMAL)
+        self.msgText.delete(1.0, tk.END)
+        self.msgText.configure(state=tk.DISABLED)
+        
     def connectButtonClick(self):
         new_url = self.ipPort.get()
         ref.change_database(new_url)
         self.clearButtonClick()  # Clear messages when connecting to a new Firebase database
 
     def sendButtonClick(self):
-        new_message = {'name': 'User', 'text': self.textIn.get()}
+        new_message = {'name': 'Nazlis', 'text': self.textIn.get()}
         ref.push(new_message)
+        self.handleMessage(new_message)
 
     def sendMessage(self, event):
         self.sendButtonClick()
