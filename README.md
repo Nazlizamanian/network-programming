@@ -33,7 +33,7 @@ This program allows multiple clients to connect to the server simultaneously and
 ### Description 
 Calculating the entrophy and compressing data shuffeld and unshuffled to measure the differences using zlib algorthims and the efficency. A higher entropy suggests more unpredictability and less redundancy, whereas lower entropy implies patterns and more predictability. Shuffled data typically lacks patterns or redundancy, making it less compressible, while unshuffled data may have repeating patterns, potentially resulting in better compression. Analyzing the compression ratios and sizes of compressed data.
 
-## Lab 10 Email and Simpsons tv tabla regular expressions
+## Lab 10 Valid email and Simpsons tv tabla regular expressions
 ### Description 
 #### Task 1 & 2
 Defines a function, is_valid_email(email), which utilizes a regular expression to check if a given email address adheres to a common format. The function prints whether each tested email address is valid or not based on the specified pattern, highlighting its conformance to typical email address structure.
