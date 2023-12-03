@@ -1,4 +1,4 @@
-#Lab4 Nazli Zamanian Gustavsson
+#Lab4 Nazli Zamanian
 #4.1 Experiment
 def myTest():
     yield 1

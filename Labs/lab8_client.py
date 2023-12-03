@@ -1,4 +1,4 @@
-#Lab8 Nazli Zamanian gustavsson
+#Lab8 Nazli Zamanian
 import tkinter as tk
 import tkinter.messagebox as tkmsgbox
 import tkinter.scrolledtext as tksctxt

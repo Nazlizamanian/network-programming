@@ -1,4 +1,4 @@
-#Lab 3 Nazli Zamanian Gustavsson
+#Lab 3 Nazli Zamanian
 import random
 
 class Card:

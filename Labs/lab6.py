@@ -1,4 +1,4 @@
-# #Lab6 Nazli Zamanian Gustavsson
+# #Lab6 Nazli Zamanian 
 import socket
 #http://localhost:8080/blub/blib.html. 
 #http://localhost:8080/

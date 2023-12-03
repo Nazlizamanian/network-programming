@@ -1,4 +1,4 @@
-#Lab 7 Nazli Zamanian Gustavsson Client
+#Lab 7 Nazli Zamanian Client
 import socket
 import threading
 

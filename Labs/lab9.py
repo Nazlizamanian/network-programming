@@ -1,4 +1,4 @@
-#Lab 7 Nazli Zamanian Gustavsson
+#Lab 7 Nazli Zamanian 
 import math
 import random
 import zlib  

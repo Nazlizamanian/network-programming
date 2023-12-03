@@ -1,4 +1,4 @@
-#Lab5 Nazli Zamanian Gustavsson
+#Lab5 Nazli Zamanian 
 import socket
 
 def serversideGetPlaySocket():

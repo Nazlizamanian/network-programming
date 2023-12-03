@@ -1,4 +1,4 @@
-#Lab 11 Nazli Zamanian Gustavsson
+#Lab 11 Nazli Zamanian 
 import sqlite3
 
 conn = sqlite3.connect('score_data.db')

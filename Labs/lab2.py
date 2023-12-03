@@ -1,4 +1,4 @@
-# Lab 2 Nazli Zamanian Gustavsson
+# Lab 2 Nazli Zamanian 
 pointsPerPerson = {}
 
 with open("score2.txt", 'r') as file:

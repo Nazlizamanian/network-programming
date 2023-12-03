@@ -1,4 +1,4 @@
-#Lab10 Nazli Zamanian Gustavsson Regex
+#Lab10 Nazli Zamanian Regex
 
 
 #10.2 Introductory experiments
