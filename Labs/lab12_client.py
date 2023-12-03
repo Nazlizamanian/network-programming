@@ -4,6 +4,7 @@ import tkinter.scrolledtext as tksctxt
 import firebase_admin
 from firebase_admin import db
 
+#Firebase Initialization
 cred = firebase_admin.credentials.Certificate('lab12network-key.json')
 url = "https://lab12network-23d3e-default-rtdb.europe-west1.firebasedatabase.app/"
 firebase_admin.initialize_app(cred, {'databaseURL': url})
@@ -16,7 +17,7 @@ class Application(tk.Frame):
         
         self.create_widgets()
 
-    def create_widgets(self):
+    def create_widgets(self): #GUI 
         self.groupCon = tk.LabelFrame(bd=0)
         self.groupCon.pack(side="top")
 
@@ -60,9 +61,10 @@ class Application(tk.Frame):
         # Start listening to changes in the Firebase 'messages' node
         self.messages_stream = ref.listen(self.streamHandler)
 
+#Event handeling methods 
     def clearButtonClick(self):
-        ref.delete()  # Clear all messages in the Firebase database
-        self.msgText.configure(state=tk.NORMAL)
+        ref.delete()  #deletes all messages in firebase database, by removing the enitre content of /messages node 
+        self.msgText.configure(state=tk.NORMAL) #update our states.
         self.msgText.delete(1.0, tk.END)
         self.msgText.configure(state=tk.DISABLED)
         
@@ -72,18 +74,18 @@ class Application(tk.Frame):
         self.clearButtonClick()  # Clear messages when connecting to a new Firebase database
 
     def sendButtonClick(self):
-        new_message = {'name': 'Nazlis', 'text': self.textIn.get()}
-        ref.push(new_message)
-        self.handleMessage(new_message)
+        new_message = {'name': 'Nazlis', 'text': self.textIn.get()} #creates a dicitionary with keys name and text, 
+        ref.push(new_message) #push message to database under the /message node
+        self.handleMessage(new_message) #update our GUI
 
-    def sendMessage(self, event):
+    def sendMessage(self, event): #if the user presses the Enter keyboard it also sends a message.
         self.sendButtonClick()
 
     def streamHandler(self, incomingData):
-        if incomingData.event_type == 'put':
-            if incomingData.path == '/':
-                if incomingData.data is not None:
-                    for key in incomingData.data:
+        if incomingData.event_type == 'put': #handles incoming events from the firebase, checks for incoming put event, this occurs when data is added our updated,
+            if incomingData.path == '/': # checks that the event is related to the root node /,
+                if incomingData.data is not None: #checks that there is actual data coming in.
+                    for key in incomingData.data: #iterate through the keys 
                         message = incomingData.data[key]
                         self.handleMessage(message)
         else:
@@ -108,7 +110,5 @@ def on_closing():
 
 g_root = tk.Tk()
 g_app = Application(master=g_root)
-
 g_root.protocol("WM_DELETE_WINDOW", on_closing)
-
 g_app.mainloop()
