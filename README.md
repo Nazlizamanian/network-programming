@@ -44,5 +44,6 @@ Uses a regular expression (regex_pattern) to extract information about each the 
 ### Description 
 Establishes a connection to an SQLite database and creates two tables, 'persons' and 'scores'. It then reads data from the file ('score2.txt') and populates the tables with the parsed information, and performs two SQL queries. The first query retrieves the top 10 persons with the highest total points, while the second one identifies the 10 most difficult tasks based on minimal total points. The script also includes functions to print the contents of the 'persons' and 'scores' tables, as well as the results of the SQL queries.
 
-## Lab 12 Firebase 
+## Lab 12 GUI chat using Push Technology to Firebase database
 ### Description 
+Created a GUI chat client utilizing Firebase Realtime Database, subscribing to the database upon startup to receive the entire chat history in a single push from the server. Messages are displayed dynamically, with any subsequent database updates triggering real-time updates on the GUI. Sending a message involves adding an entry to the database, creating a seamless and synchronized chat experience.
