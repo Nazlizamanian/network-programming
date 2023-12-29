@@ -21,13 +21,9 @@ A basic program that enables two users to engage in a simplified Rock, Paper and
 ### Description 
 This program creates a basic HTTP server. It listens on a port and responds to incoming HTTP requests with a simple HTML page that displays the client's response. 
 
-## Lab 7 Basic chat server 
+## Lab 7  and Lab 8 Basic chat server 
 ### Description 
-A program that essentially sets up a basic chat server where multiple clients can connect and exchange messages in a chat room. The server acts as an intermediary that forwards messages from one client to all other connected clients. It uses non-blocking sockets to handle multiple clients simultaneously, and the communication is in plain text format.
-
-## Lab 8 GUI extended chat server
-### Description
-This program allows multiple clients to connect to the server simultaneously and exchange messages in a simple chat environment. The server uses the select function to efficiently manage multiple connections without the need for separate threads or processes.
+This program establishes a fundamental chat server allowing numerous clients to connect and share messages within a designated chat room. Serving as an intermediary, the server efficiently forwards messages from one client to all others. It employs non-blocking sockets to manage multiple clients simultaneously, enhancing scalability. Notably, the communication occurs in plain text format. This application supports concurrent connections from multiple clients, fostering a seamless exchange of messages within a straightforward chat environment. The server optimizes resource utilization through the use of the 'select' function, eliminating the necessity for separate threads or processes. Lab 7 assignment consisted of establishing a server and lab 8 consisted of the client code with an elegant GUI.
 
 ## Lab 9 Data Compression 
 ### Description 
