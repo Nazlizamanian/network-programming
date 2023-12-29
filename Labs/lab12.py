@@ -6,7 +6,6 @@ import tkinter as tk
 import tkinter.messagebox as tkmsgbox
 import tkinter.scrolledtext as tksctxt
 import socket
-
 #Firebase Initialization
 cred = firebase_admin.credentials.Certificate('lab12network-key.json')
 firebase_admin.initialize_app(cred, {'databaseURL': 'https://lab12network-fdf82-default-rtdb.europe-west1.firebasedatabase.app/'})

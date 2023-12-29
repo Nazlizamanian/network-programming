@@ -101,7 +101,6 @@ print(f"Size of the original data (theCopy): {len(theCopy)} bytes")
 compressed_theCopy = zlib.compress(theCopy)
 print(f"Size of the compressed data: {len(compressed_theCopy)} bytes\n")
 
-size_in_bytes_copy = len(compressed_theCopy)
 size_in_bits_copy = size_in_bytes_copy * 8 #amount of bits
 number_of_symbols_theCopy = len(theCopy) #amount of symbols
 bits_per_symbol_theCopy = size_in_bits_copy / number_of_symbols_theCopy #compression ratio

@@ -80,7 +80,7 @@ def determine_winner(player, opponent):
         return "lose"
 
 def check_game_over(player_points, opponent_points):
-    if player_points == 10 or opponent_points == 10:
+    if player_points == 3 or opponent_points == 3:
         print("Game over!")
         if player_points > opponent_points:
             print(f"You won {player_points} against {opponent_points}")
