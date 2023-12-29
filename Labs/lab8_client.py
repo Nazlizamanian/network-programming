@@ -1,4 +1,4 @@
-#Lab8 Nazli Zamanian
+#Lab8 Nazli Zamanian using Lab 7 server code
 import tkinter as tk
 import tkinter.messagebox as tkmsgbox
 import tkinter.scrolledtext as tksctxt
